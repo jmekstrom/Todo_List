@@ -2,8 +2,10 @@ To Do list Featuresets
 
 # TODO .1
 - <a href="https://github.com/Learning-Fuze/TDL/tree/v.1">Version .1 scope</a>
+
 # TODO .2
 - <a href="https://github.com/Learning-Fuze/TDL/tree/v.2">Version .2 scope</a>
+
 # TODO .3
 - <a href="https://github.com/Learning-Fuze/TDL/tree/v.3">Version .3 scope</a>
 
