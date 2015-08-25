@@ -1,0 +1,77 @@
+@font-face {
+    font-family: handdrawn;
+    src: url("fonts/daniel.ttf");
+}
+
+@font-face {
+    font-family: handdrawnbd;
+    src: url("fonts/danielbd.ttf");
+}
+
+.header{
+    background-color: #2A6677;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.footer{
+    background-color: #2A6677;
+    height: 100px;
+    font-family: monospace;
+}
+
+.login{
+    margin-top: 30px;
+}
+
+.title{
+    height: 100%;
+    width: 75%;
+    color: white;
+    margin-left: 20px;
+}
+
+.title h1{
+    line-height: 70px;
+}
+
+.register{
+    width: 50%;
+    min-width: 300px;
+    max-width: 500px;
+    height: 500px;
+    background-color: rgba(200,200,195,0.75);
+    margin: 0 auto;
+    padding: 40px;
+    padding-top: 10px;
+    border-radius: 10px;
+}
+
+.content_container{
+    padding-top: 200px;
+    height: 800px;
+    background-image: url("http://www.remodelista.com/files/styles/733_0s/public/fields/Linen-Reclaimed-oak-floors-remodelista.jpg");
+}
+
+body{
+    color: white;
+    font-family: handdrawnbd;
+}
+
+.facebook{
+    background-color: #002a65;
+}
+
+.space{
+    margin-top: 10px;
+}
+
+.about{
+    width: 75%;
+    color: black;
+    text-align: center;
+    margin: 0 auto;
+    padding: 50px;
+}
