@@ -122,3 +122,9 @@ tr td:first-child{
     height: 50px;
     width: 50px;
 }
+
+.modal-content{
+    color: #444444;
+    margin-top: 150px;
+
+}

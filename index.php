@@ -21,8 +21,9 @@ if (!isset($_SESSION['userId'])){
             <?php
             session_destroy();
             ?>
-            location.reload(true);
-        }
+            location.reload();
+        })
+
     })
 </script>
 <div class="container-fuild">
