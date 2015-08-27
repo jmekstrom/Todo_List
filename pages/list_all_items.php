@@ -4,7 +4,7 @@
         <th class="checkbox_th">✓</th>
         <th>Task
             <button class="addBtn btn btn-xs btn-success" type="button"
-                data-toggle="modal" data-target="#myModal">+</button>
+                data-toggle="modal" data-target="#addModal">+</button>
         </th>
         <th>Date</th>
         <th>Priority</th>
@@ -38,7 +38,7 @@
 </table>
 
 <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
+<div id="addModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -49,16 +49,16 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Task">
+                    <input type="text" class="form-control" placeholder="Task" id="taskInput">
                 </div>
 
                 <div class="input-group form-group date">
-                    <input type="text" class="form-control" placeholder="Date">
+                    <input type="text" class="form-control" placeholder="Date" id="dateInput">
                     <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
                 </div>
 
                 <div class="form-group">
-                    <select class="form-control" id="sel1">
+                    <select class="form-control" id="priorityInput">
                         <option></option>
                         <option>Low</option>
                         <option>Medium</option>
@@ -67,11 +67,11 @@
                 </div>
 
                 <div class="form-group">
-                    <textarea class="form-control" rows="5" id="comment" placeholder="Extra details..."></textarea>
+                    <textarea class="form-control" rows="5" id="detailsInput" placeholder="Extra details..."></textarea>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Add</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="addTask()">Add</button>
             </div>
         </div>
 

@@ -52,4 +52,25 @@ function logout_ajaxCall(){
     })
 }
 
+var todo_item_array;
+var id = 0;
+var modal_td_DOM = $("<td>",{
+    "data-toggle": "modal",
+    "data-target": "itemModal"
+})
+var checkbox = $("<input>",{
+    type: "checkbox"
+})
+function addTask(){
+    id++;
+    var task     = $("#taskInput").val();
+    var date     = $("#dateInput").val();
+    var priority = $("#priorityInput").val();
+    var details  = $("#detailsInput").val();
+    var timeStamp = new Date().getTime();
+    var todo_item = {id:id,task:task,date:date,priority:priority,details:details,timeStamp:timeStamp}
+    //todo_item_array.push(todo_item);
+    $(".tableBottom").before("<tr id='"+id+"'><td><input type='checkbox'></td>"+modal_td_DOM+"</tr>");
+
+}
 
