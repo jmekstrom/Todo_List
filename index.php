@@ -1,8 +1,10 @@
 <?php
 session_start();
-//$_SESSION['userId'] = "jmekstrom";
-if (!isset($_SESSION['userId'])){
-    $_GET['current_page'] = "landing";
+if (empty($_SESSION['user_id'])){
+    $_GET['current_page'] = "login";
+}
+else{
+    $_GET['current_page'] = "list_all_items";
 }
 ?>
 
@@ -15,24 +17,13 @@ if (!isset($_SESSION['userId'])){
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="bootstrap-social.css">
-<script>
-    $(document).ready(function(){
-        $(".newUserBtn").click(function(){
-            <?php
-            session_destroy();
-            ?>
-            location.reload();
-        })
-
-    })
-</script>
+<script src="main.js"></script>
 <div class="container-fuild">
     <div class="row header_div">
         <?php
         include_once('template/header.php');
         ?>
     </div>
-
     <div class="content_container">
         <?php
         include_once("pages/".$_GET['current_page'].".php");

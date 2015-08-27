@@ -3,6 +3,6 @@
         <h1>Todo List</h1>
     </div>
     <div class="col-xs-6 account_summary">
-        <button class='btn btn-default pull-right newUserBtn'>New User</button>
+        <button class='btn btn-default pull-right' id="logoutBtn" onclick="logout_ajaxCall()">Log Out</button>
     </div>
 </div>

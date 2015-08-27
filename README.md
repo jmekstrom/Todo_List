@@ -6,8 +6,8 @@ To Do list Featuresets
 # TODO .2
 - <a href="https://github.com/Learning-Fuze/TDL/tree/v.2">Version .2 scope</a>
 
-# TODO .3
-- <a href="https://github.com/Learning-Fuze/TDL/tree/v.3">Version .3 scope</a>
+# TODO .5
+- <a href="https://github.com/Learning-Fuze/TDL/tree/v.5">Version .5 scope</a>
 
 # TODO 1.0 (Group Project)
 - Combine code together to form a group project

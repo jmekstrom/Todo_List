@@ -11,11 +11,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr data-toggle="modal" data-target="#itemModal">
+    <tr>
         <td><input type="checkbox"></td>
-        <td>Creating version 0.1 of the to do list</td>
-        <td>8/25/15</td>
-        <td>high</td>
+        <td data-toggle="modal" data-target="#itemModal">Creating version 0.1 of the to do list</td>
+        <td data-toggle="modal" data-target="#itemModal">8/25/15</td>
+        <td data-toggle="modal" data-target="#itemModal">high</td>
     </tr>
     <tr>
         <td><input type="checkbox"></td>

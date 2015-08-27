@@ -1,7 +1,7 @@
 <div class="register">
     <h2 class="page-header">Log in</h2>
 
-    <form role="form" action="login.php" method="GET">
+    <form role="form">
         <button class="btn btn-block btn-social btn-facebook facebook">
             <i class="fa fa-facebook"></i> Log in with Facebook
         </button>
@@ -15,14 +15,13 @@
         </div>
         <div class="form-group">
             <label for="email">Email address:</label>
-            <input type="email" class="form-control" id="email">
+            <input type="email" class="form-control" id="username">
         </div>
         <div class="form-group">
             <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd">
+            <input type="password" class="form-control" id="password">
         </div>
-
-        <button type="submit" class="btn btn-success">Login</button>
+        <button type="button" class="btn btn-success" id="loginBtn" onclick="login_ajaxCall()">Login</button>
     </form>
 </div>
 
