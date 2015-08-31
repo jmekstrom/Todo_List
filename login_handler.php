@@ -15,6 +15,7 @@ if($_POST['username']=='AlexMattingley'){//this is checking the information sent
         $output['user']=$_SESSION['user'];
         $output['success']=true;
         $output['destination']='list_all_items';
+        $output['session'] = $_SESSION;
     }
     else{
         //password is wrong

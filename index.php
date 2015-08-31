@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (empty($_SESSION['user_id'])){
+if (empty($_SESSION['user']['id'])){
     $_GET['current_page'] = "login";
 }
 else{
