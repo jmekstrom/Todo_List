@@ -45,6 +45,7 @@ function logout_ajaxCall(){
         method: "POST",
         dataType: "json",
         success: function (response) {
+            console.log(response);
             load_content("login");
         }
     })

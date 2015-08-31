@@ -35,6 +35,7 @@ if($status == "login") {
 }
 else{
     session_destroy();
+    print('I am at the else');
     $message = "session destroyed";
     $output = ['success' => true,'message' => $message];
     $output_string = json_encode($output);
