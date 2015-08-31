@@ -15,7 +15,7 @@ function login_ajaxCall() {
             //print(json_encode($output)); FROM LOGIN.PHP
             console.log('the response is ',response);
             //$('body').html(response)
-            if(response.success==true) {
+            if(response.success) {
                 console.log('IT WORKED')
                 load_content(response.destination);
             }
