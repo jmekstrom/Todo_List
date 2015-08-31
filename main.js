@@ -18,7 +18,6 @@ function login_ajaxCall() {
             if(response.success==true) {
                 console.log('IT WORKED')
                 load_content(response.destination);
-                update_list(); //this needs to be resolved.
             }
         }
     });
