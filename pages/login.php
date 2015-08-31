@@ -14,12 +14,12 @@
         <div class="page-header space">
         </div>
         <div class="form-group">
-            <label for="email">Email address:</label>
-            <input type="email" class="form-control" id="username">
+            <label for="text">Email address:</label>
+            <input type="text" class="form-control" id="username" value="AlexMattingley">
         </div>
         <div class="form-group">
             <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="password">
+            <input type="password" class="form-control" id="password" value="test">
         </div>
         <button type="button" class="btn btn-success" id="loginBtn" onclick="login_ajaxCall()">Login</button>
     </form>

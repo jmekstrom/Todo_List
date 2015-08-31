@@ -2,28 +2,30 @@
 function login_ajaxCall() {
     var username = $('#username').val();
     var password = $('#password').val();
-    var login_status = "login";
-    $.ajax({
-        url: "login_handler.php",
-        data: {username, password, login_status},
-        cache: false,
+    $.ajax({ //this page sends data to the login_handler.php page
+        url:"login_handler.php",
         method: "POST",
-        dataType: "json",
-        success: function (data) {
-            if (data.success) {
-                console.log("login successful", data);
-                load_content("list_all_items");
-            }
-            else {
-                console.log("login failed", data);
-                load_content("login");
-            }
+        cache: "false",
+        data : {
+            username: username,
+            password: password
         },
-
-    })
+        dataType: 'json',
+        success: function(response){
+            //print(json_encode($output)); FROM LOGIN.PHP
+            console.log('the response is ',response);
+            //$('body').html(response)
+            if(response.success==true) {
+                console.log('IT WORKED')
+                load_content(response.destination);
+                update_list(); //this needs to be resolved.
+            }
+        }
+    });
 }
 
 function load_content(url){
+    console.log('bombs away');
     console.log("loading: "+url+".php");
     $.ajax({
         url: "pages/"+ url +".php",
@@ -37,13 +39,11 @@ function load_content(url){
 }
 
 function logout_ajaxCall(){
-    var login_status = "logout";
     $.ajax({
-        url: "login_handler.php",
-        data: login_status,
+        url: "logout.php",
         cache: false,
         method: "POST",
-        dataType: "json",
+        dataType: "text",
         success: function (response) {
             console.log(response);
             load_content("login");
