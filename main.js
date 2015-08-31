@@ -122,3 +122,7 @@ function showTask(id){
     $("#id_p").html("Task Number: " + todoObj.id);
     $('#itemModal').modal('show');
 }
+
+function deleteTask(){
+
+}
