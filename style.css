@@ -13,6 +13,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    color: white;
 }
 
 .account_summary{
@@ -44,7 +45,6 @@
 }
 
 body{
-    color: white;
     font-family: handdrawnbd;
 }
 
@@ -83,7 +83,7 @@ a:link, a:visited{
     background-color: white;
     color: #444444;
     border-radius: 10px;
-    width: 90%;
+    width: 95%;
 }
 
 tr {
@@ -102,11 +102,11 @@ tr {
     font-style: bold;
 }
 
-.addBtn:focus{
+.addBtn:focus, .deleteTaskBtn:focus{
     outline:none;
 }
 
-.addBtn:active:focus {
+.addBtn:active:focus, .deleteTaskBtn:active:focus {
     outline: 0;
 }
 
@@ -118,6 +118,10 @@ tr td:first-child{
     text-align: center;
 }
 
+tr td:last-child {
+    text-align: center;
+}
+
 .img-circle{
     height: 50px;
     width: 50px;
@@ -125,6 +129,40 @@ tr td:first-child{
 
 .modal-content{
     color: #444444;
-    margin-top: 150px;
 
+}
+
+.hour, .minute{
+    font-size: 12px;
+}
+
+.deleteTaskBtn{
+    font-size: 10px;
+    height: 20px;
+    width: 20px;
+    line-height: 20px;
+    border-radius: 100%;
+    font-style: bold;
+}
+
+
+.task_td {
+    -ms-word-break: break-all;
+
+    /* Be VERY careful with this, breaks normal words wh_erever */
+    word-break: break-all;
+
+    /* Non standard for webkit */
+    word-break: break-word;
+
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+input[type="checkbox"]:checked + label {
+    background-image: url();
+    background-repeat: none;
+    height: 24px;
+    width: 24px;
 }
