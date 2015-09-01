@@ -18,6 +18,7 @@ function checktaskInput() {
 }
 
 function login_ajaxCall() {
+    console.log("login before ajax");
     var username = $('#username').val();
     var password = $('#password').val();
     $.ajax({ //this page sends data to the login_handler.php page
@@ -30,19 +31,16 @@ function login_ajaxCall() {
         },
         dataType: 'json',
         success: function(response){
-            //print(json_encode($output)); FROM LOGIN.PHP
             console.log('the response is ',response);
-            //$('body').html(response)
-            if(response.success==true) {
+            if(response.success) {
                 console.log('IT WORKED')
-                load_content(response.destination);
+                load_content('list_all_items');
             }
         }
     });
 }
 
 function load_content(url){
-    console.log('bombs away');
     console.log("loading: "+url+".php");
     $.ajax({
         url: "pages/"+ url +".php",
@@ -76,6 +74,7 @@ var modal_td_DOM = $("<td>",{
 })
 
 function addTask(){
+
     $(".delete_td").hide("slide");
     id++;
     var task     = $("#taskInput").val();
@@ -86,7 +85,7 @@ function addTask(){
     var complete = "incomplete";
    var $tableRow = $('<tr>',{
        'data-index': id
-   })
+   });
     var $checkbox_td = $('<td>',{
         class: "checkbox_td"
     })
@@ -131,6 +130,10 @@ function addTask(){
     }
     todo_item_array.push(todo_item);
     $('.tableBottom').before($tableRow);
+
+}
+
+function create_tas_dom(){
 
 }
 
@@ -181,3 +184,26 @@ function edit(){
         $(".delete_td").toggle('slide');
     }
 }
+
+function update_table(){
+    console.log('update Table pre-ajax');
+    $.ajax({ //this page sends data to the login_handler.php page
+        url:"data_handler.php",
+        method: "POST",
+        cache: "false",
+        data : {},
+        dataType: 'json',
+        success: function(response){
+            console.log(response);
+        }
+    });
+
+}
+
+$(document).ready(function(){
+
+    $('.content_container').on('click', '#update_list',function(){
+        update_table();
+    });
+
+});

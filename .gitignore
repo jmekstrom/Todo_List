@@ -1,3 +1,4 @@
-.idea
-.DS_store
+*.idea
+.DS_Store
 mysql_connect.php
+

@@ -19,7 +19,7 @@
     </tr>
     </tbody>
 </table>
-
+<button id="update_list">Update List from db</button>
 <!-- Modal -->
 <div id="addModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
