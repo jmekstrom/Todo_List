@@ -123,8 +123,17 @@ function showTask(id){
 
 function update_table(){
     console.log('update Table pre-ajax');
+    $.ajax({
+
+    });
+
 }
 
-$('.content_container').on('click', '#update_list',function(){
-   console.log('clicked');
+$(document).ready(function(){
+
+    $('.content_container').on('click', '#update_list',function(){
+        update_table();
+    });
+
 });
+
