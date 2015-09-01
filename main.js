@@ -1,5 +1,6 @@
 
 function login_ajaxCall() {
+    console.log("login before ajax");
     var username = $('#username').val();
     var password = $('#password').val();
     $.ajax({ //this page sends data to the login_handler.php page
