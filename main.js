@@ -56,8 +56,8 @@ var modal_td_DOM = $("<td>",{
 })
 
 function addTask(){
-    id++;
-    var task     = $("#taskInput").val();
+    id++; //increment id, for each time addTask is called.
+    var task     = $("#taskInput").val(); //each of these creates data based on inputs, these need to be replaced by db data
     var date     = $("#dateInput").val();
     var priority = $("#priorityInput").val();
     var details  = $("#detailsInput").val();
@@ -68,7 +68,7 @@ function addTask(){
    var $tableRow = $('<tr>',{
        id: id,
        'data-index': id
-   })
+   });
     var $checkbox_td = $('<td>',{
         id: "checkbox_td"
     })
@@ -91,6 +91,10 @@ function addTask(){
     $($checkbox_td).append($checkbox);
     $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td);
     $('.tableBottom').before($tableRow);
+
+}
+
+function create_tas_dom(){
 
 }
 
