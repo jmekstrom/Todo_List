@@ -123,8 +123,15 @@ function showTask(id){
 
 function update_table(){
     console.log('update Table pre-ajax');
-    $.ajax({
-
+    $.ajax({ //this page sends data to the login_handler.php page
+        url:"data_handler.php",
+        method: "POST",
+        cache: "false",
+        data : {},
+        dataType: 'json',
+        success: function(response){
+            console.log(response);
+        }
     });
 
 }
