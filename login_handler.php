@@ -1,4 +1,5 @@
 <?php
+session_start();
 //session_start();
 //
 //$output=[
@@ -42,9 +43,11 @@ if(mysqli_num_rows($results) > 0){
     while($result = mysqli_fetch_assoc($results)){
         $user_info = $result;
     }
+    $_SESSION["user_id"]= $user_info["id"];
     $user_info["success"] = true;
     $json_string = json_encode($user_info);
     print($json_string);
+
 }else{
     $user_info = [];
     $user_info["success"] = false;
