@@ -1,4 +1,4 @@
-
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -13,7 +13,7 @@
 
 
 <script src="main.js"></script>
-<div class="container-fuild">
+<div>
     <div class="row header_div">
 
     <div class='header col-xs-12'>

@@ -83,7 +83,7 @@ a:link, a:visited{
     background-color: white;
     color: #444444;
     border-radius: 10px;
-    width: 90%;
+    width: 95%;
 }
 
 tr {
@@ -130,7 +130,6 @@ tr td:last-child {
 .modal-content{
     color: #444444;
 
-
 }
 
 .hour, .minute{
@@ -144,4 +143,26 @@ tr td:last-child {
     line-height: 20px;
     border-radius: 100%;
     font-style: bold;
+}
+
+
+.task_td {
+    -ms-word-break: break-all;
+
+    /* Be VERY careful with this, breaks normal words wh_erever */
+    word-break: break-all;
+
+    /* Non standard for webkit */
+    word-break: break-word;
+
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+input[type="checkbox"]:checked + label {
+    background-image: url();
+    background-repeat: none;
+    height: 24px;
+    width: 24px;
 }

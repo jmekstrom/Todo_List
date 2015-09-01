@@ -8,6 +8,7 @@
         </th>
         <th>Date</th>
         <th>Priority</th>
+        <th style="display: none" class="delete_td"></th>
     </tr>
     </thead>
     <tbody>
@@ -62,7 +63,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="addTask()">Add</button>
+                <button type="button" id='addtaskBtn' class="btn btn-success" data-dismiss="modal" onclick="addTask()">Add</button>
             </div>
         </div>
 
