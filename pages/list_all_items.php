@@ -43,7 +43,7 @@
                     $(function () {
                         $('#dateInput').datetimepicker({
                             orientation: "left bottom",
-                            format: 'mm/dd/yyyy H:ii p'
+                            format: 'm/d/yy H:iip'
                         });
 
                     });
