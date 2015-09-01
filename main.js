@@ -23,7 +23,6 @@ function login_ajaxCall() {
 }
 
 function load_content(url){
-    console.log('bombs away');
     console.log("loading: "+url+".php");
     $.ajax({
         url: "pages/"+ url +".php",
@@ -121,3 +120,11 @@ function showTask(id){
     $("#id_p").html("Task Number: " + todoObj.id);
     $('#itemModal').modal('show');
 }
+
+function update_table(){
+    console.log('update Table pre-ajax');
+}
+
+$('.content_container').on('click', '#update_list',function(){
+   console.log('clicked');
+});
