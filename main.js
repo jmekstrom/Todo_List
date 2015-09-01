@@ -11,7 +11,7 @@ function login_ajaxCall() {
             username: username,
             password: password
         },
-        dataType: 'json',
+        dataType: 'text',
         success: function(response){
             //print(json_encode($output)); FROM LOGIN.PHP
             console.log('the response is ',response);
