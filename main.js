@@ -1,5 +1,6 @@
 
 function login_ajaxCall() {
+    console.log("login before ajax");
     var username = $('#username').val();
     var password = $('#password').val();
     $.ajax({ //this page sends data to the login_handler.php page
@@ -12,19 +13,16 @@ function login_ajaxCall() {
         },
         dataType: 'json',
         success: function(response){
-            //print(json_encode($output)); FROM LOGIN.PHP
             console.log('the response is ',response);
-            //$('body').html(response)
             if(response.success) {
                 console.log('IT WORKED')
-                load_content(response.destination);
+                load_content('list_all_items');
             }
         }
     });
 }
 
 function load_content(url){
-    console.log('bombs away');
     console.log("loading: "+url+".php");
     $.ajax({
         url: "pages/"+ url +".php",
@@ -58,8 +56,8 @@ var modal_td_DOM = $("<td>",{
 })
 
 function addTask(){
-    id++;
-    var task     = $("#taskInput").val();
+    id++; //increment id, for each time addTask is called.
+    var task     = $("#taskInput").val(); //each of these creates data based on inputs, these need to be replaced by db data
     var date     = $("#dateInput").val();
     var priority = $("#priorityInput").val();
     var details  = $("#detailsInput").val();
@@ -70,7 +68,7 @@ function addTask(){
    var $tableRow = $('<tr>',{
        id: id,
        'data-index': id
-   })
+   });
     var $checkbox_td = $('<td>',{
         id: "checkbox_td"
     })
@@ -93,6 +91,10 @@ function addTask(){
     $($checkbox_td).append($checkbox);
     $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td);
     $('.tableBottom').before($tableRow);
+
+}
+
+function create_tas_dom(){
 
 }
 
@@ -122,3 +124,27 @@ function showTask(id){
     $("#id_p").html("Task Number: " + todoObj.id);
     $('#itemModal').modal('show');
 }
+
+function update_table(){
+    console.log('update Table pre-ajax');
+    $.ajax({ //this page sends data to the login_handler.php page
+        url:"data_handler.php",
+        method: "POST",
+        cache: "false",
+        data : {},
+        dataType: 'json',
+        success: function(response){
+            console.log(response);
+        }
+    });
+
+}
+
+$(document).ready(function(){
+
+    $('.content_container').on('click', '#update_list',function(){
+        update_table();
+    });
+
+});
+

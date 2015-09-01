@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="bootstrap-social.css">
 <script src="main.js"></script>
-<div class="container-fuild">
+<div>
     <div class="row header_div">
 
     <div class='header col-xs-12'>
