@@ -3,8 +3,8 @@
     <tr>
         <th class="checkbox_th">✓</th>
         <th>Task
-            <button class="addBtn btn btn-xs btn-success" type="button"
-                onclick="addClicked()">+</button>
+            <button class="addBtn btn btn-xs btn-success" type="button" onclick="addClicked()">+</button>
+            <button class="editBtn btn btn-xs btn-warning" type="button" onclick="edit()" >Edit</button>
         </th>
         <th>Date</th>
         <th>Priority</th>
@@ -35,9 +35,18 @@
                 </div>
 
                 <div class="input-group form-group date">
-                    <input type="text" class="form-control" placeholder="Date" id="dateInput">
-                    <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+                    <input type="text" class="form-control" placeholder="Date & Time" id="dateInput">
+                    <div class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></div>
                 </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $('#dateInput').datetimepicker({
+                            orientation: "left bottom",
+                            format: 'mm/dd/yyyy H:ii p'
+                        });
+
+                    });
+                </script>
 
                 <div class="form-group">
                     <select class="form-control" id="priorityInput">
@@ -80,7 +89,7 @@
                 <p id="details_p"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="deleteTask()">Delete</button>
+
             </div>
         </div>
 

@@ -90,8 +90,18 @@ function addTask(){
         id: "priority_td",
         onclick: "showTask("+id+")"
     }).text(priority);
+    var $deleteTask_td = $("<td>",{
+        id: "delete_td"
+    })
+    var $deleteTask_btn = $("<button>",{
+        display: "none",
+        type: "button",
+        class: "btn btn-xs btn-danger deleteTaskBtn",
+        onclick: "deleteTask(" + id + ")"
+    }).text('X');
+    $($deleteTask_td).append($deleteTask_btn).hide();
     $($checkbox_td).append($checkbox);
-    $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td);
+    $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td,$deleteTask_td);
     $('.tableBottom').before($tableRow);
 
 }
@@ -125,4 +135,8 @@ function showTask(id){
 
 function deleteTask(){
 
+}
+
+function edit(){
+    console.log("edit clicked");
 }
