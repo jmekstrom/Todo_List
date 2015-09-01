@@ -11,14 +11,12 @@ function login_ajaxCall() {
             username: username,
             password: password
         },
-        dataType: 'text',
+        dataType: 'json',
         success: function(response){
-            //print(json_encode($output)); FROM LOGIN.PHP
             console.log('the response is ',response);
-            //$('body').html(response)
             if(response.success) {
                 console.log('IT WORKED')
-                load_content(response.destination);
+                load_content('list_all_items');
             }
         }
     });

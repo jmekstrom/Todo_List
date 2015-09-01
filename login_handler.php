@@ -1,4 +1,4 @@
-//<?php
+<?php
 //session_start();
 //
 //$output=[
@@ -29,7 +29,7 @@
 //print(json_encode($output));
 //
 //
-//?>
+?>
 
 <?php
 
@@ -40,10 +40,17 @@ $query = "SELECT * FROM tdl_users WHERE username = '$username' AND password = '$
 $results = mysqli_query($conn, $query);
 if(mysqli_num_rows($results) > 0){
     while($result = mysqli_fetch_assoc($results)){
-        $user_info[] = $result;
+        $user_info = $result;
     }
-    print('query working');
-    print_r($user_info); //this is working.
+    $user_info["success"] = true;
+    $json_string = json_encode($user_info);
+    print($json_string);
+}else{
+    $user_info = [];
+    $user_info["success"] = false;
+    $user_info["error"] = "your username or password is incorrect";
+    $json_string = json_encode($user_info);
+    print($json_string);
 }
 
 ?>
