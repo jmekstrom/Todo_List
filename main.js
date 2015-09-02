@@ -82,7 +82,7 @@ function addTask(){
     $(".delete_td").hide("slide");
     id++;
     var task     = $("#taskInput").val();
-    var date     = $("#dateInput").val();
+    var due_date     = $("#dateInput").val();
     var priority = $("#priorityInput").val();
     var details  = $("#detailsInput").val();
     var created_datetime = new Date().getTime();
@@ -91,7 +91,7 @@ function addTask(){
         id: id,
         complete: complete,
         task: task,
-        date: date,
+        due_date: due_date,
         priority: priority,
         details: details,
         created_datetime: created_datetime,
@@ -99,6 +99,7 @@ function addTask(){
     }
     create_task_dom(todo_item);
     todo_item_array.push(todo_item);
+    console.log("todo_item_array inside of addTask",todo_item_array);
 
 }
 
@@ -163,7 +164,7 @@ function showTask(id){
     }
     $("#task").html("Task: "+todoObj.task);
     $("#status_p").html("Status:" + todoObj.complete);
-    $("#date_p").html("Complete by: " + todoObj.date);
+    $("#date_p").html("Complete by: " + todoObj.due_date);
     $("#priority_p").html("Priority: " + todoObj.priority);
     $("#details_p").html("Extra Details: " + todoObj.details);
     $("#created_p").html("Created: " + todoObj.created_datetime);
@@ -200,6 +201,14 @@ function update_table(){
         dataType: 'json',
         success: function(response){
             console.log(response);
+            console.log(response.length);
+            for(var i = 0; i< response.length; i++){
+                todo_item_array.push(response[i]);
+            }
+            console.log("todo_item_arry inside of update_table: " , todo_item_array);
+            for(var j = 0; j < todo_item_array.length; j++){
+                create_task_dom(todo_item_array[j]);
+            }
         }
     });
 
