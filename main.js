@@ -206,7 +206,7 @@ function edit() {
 function update_table(){
     console.log('update Table pre-ajax');
     $.ajax({ //this page sends data to the login_handler.php page
-        url: "data_handler.php",
+        url: "data_handler_receive.php",
         method: "POST",
         cache: "false",
         data: {},
