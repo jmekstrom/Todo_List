@@ -11,12 +11,14 @@
         <th style="display: none" class="delete_td"></th>
     </tr>
     </thead>
-    <tbody>
+    <tfoot>
     <tr class="tableBottom">
         <td></td>
         <td></td>
         <td></td>
     </tr>
+    </tfoot>
+    <tbody>
     </tbody>
 </table>
 <button id="update_list">Update List from db</button>
