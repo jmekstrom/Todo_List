@@ -13,7 +13,7 @@ if(!empty($_SESSION['user_id'])){
     $task= "test item title";
     $user_id = $_SESSION['user_id'];
     require('mysql_connect.php');
-    $query = "INSERT INTO `tdl_item_list`(`id`, `task`, `details`, `created_datetime`, `user_id`, `complete`, `priority`, `due_date`) VALUES (null,'this is a task','the details','0000-00-00','1','0','low','0000-00-00')";
+    $query = "INSERT INTO `tdl_item_list`(`id`, `task`, `details`, `created_datetime`, `user_id`, `complete`, `priority`, `due_date`) VALUES ('$id','$task','$details','$created_datetime','$user_id','$complete','$priority','$due_date')";
     $results = mysqli_query($conn, $query);
     if(mysqli_affected_rows($conn) > 0){
         print('mysqli_affected_rows is true');
