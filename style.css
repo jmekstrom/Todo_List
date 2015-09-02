@@ -48,9 +48,6 @@ body{
     font-family: handdrawnbd;
 }
 
-.facebook{
-    background-color: #002a65;
-}
 
 .space{
     margin-top: 10px;
@@ -114,10 +111,6 @@ tr {
     text-align: center;
 }
 
-tr td:first-child{
-    text-align: center;
-}
-
 tr td:last-child {
     text-align: center;
 }
@@ -129,6 +122,7 @@ tr td:last-child {
 
 .modal-content{
     color: #444444;
+    margin-top: 100px;
 
 }
 
@@ -160,9 +154,20 @@ tr td:last-child {
     hyphens: auto;
 }
 
-input[type="checkbox"]:checked + label {
-    background-image: url();
-    background-repeat: none;
-    height: 24px;
-    width: 24px;
+.glyphicon:before {
+    visibility: visible;
+    margin: 0 auto;
+}
+
+.glyphicon.glyphicon-unchecked:checked:before {
+    content: "\e067";
+}
+
+input[type=checkbox].glyphicon {
+    visibility: hidden;
+    margin: 0 auto;
+}
+
+.crossout{
+    text-decoration: line-through;
 }

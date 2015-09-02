@@ -1,11 +1,24 @@
 var taskinput = $("#taskInput").val();
 $(document).ready(function () {
+    $('.content_container').on('click', '#update_list', function () {
+        update_table();
+    });
     taskinput = $("#taskInput").val();
     checktaskInput();
     $('#addModal').keyup(function () {
         taskinput = $("#taskInput").val();
         checktaskInput();
     })
+    $('tbody').on('change', '.checkbox', function () {
+        if ($(this).is(':checked')) {
+            $(this).parent().siblings().addClass("crossout");
+        }
+        else {
+            $(this).parent().siblings().removeClass("crossout");
+        }
+    });
+
+
 })
 
 function checktaskInput() {
@@ -22,17 +35,17 @@ function login_ajaxCall() {
     var username = $('#username').val();
     var password = $('#password').val();
     $.ajax({ //this page sends data to the login_handler.php page
-        url:"login_handler.php",
+        url: "login_handler.php",
         method: "POST",
         cache: "false",
-        data : {
+        data: {
             username: username,
             password: password
         },
         dataType: 'json',
-        success: function(response){
-            console.log('the response is ',response);
-            if(response.success) {
+        success: function (response) {
+            console.log('the response is ', response);
+            if (response.success) {
                 console.log('IT WORKED')
                 load_content('list_all_items');
             }
@@ -40,20 +53,20 @@ function login_ajaxCall() {
     });
 }
 
-function load_content(url){
-    console.log("loading: "+url+".php");
+function load_content(url) {
+    console.log("loading: " + url + ".php");
     $.ajax({
-        url: "pages/"+ url +".php",
+        url: "pages/" + url + ".php",
         data: {},
         dataType: 'html',
-        success: function(response){
+        success: function (response) {
             $(".content_container").html(response);
-            window.history.pushState('test','test','index.php?current_page='+ url);
+            window.history.pushState('test', 'test', 'index.php?current_page=' + url);
         }
     })
 }
 
-function logout_ajaxCall(){
+function logout_ajaxCall() {
     $.ajax({
         url: "logout.php",
         cache: false,
@@ -66,50 +79,50 @@ function logout_ajaxCall(){
     })
 }
 
-var todo_item_array=[];
+var todo_item_array = [];
 var id = 0;
-var modal_td_DOM = $("<td>",{
+var modal_td_DOM = $("<td>", {
     "data-toggle": "modal",
     "data-target": "itemModal"
 })
 
-function addTask(){
+function addTask() {
 
     $(".delete_td").hide("slide");
     id++;
-    var task     = $("#taskInput").val();
-    var date     = $("#dateInput").val();
+    var task = $("#taskInput").val();
+    var date = $("#dateInput").val();
     var priority = $("#priorityInput").val();
-    var details  = $("#detailsInput").val();
+    var details = $("#detailsInput").val();
     var created_datetime = new Date().getTime();
     var complete = "incomplete";
-   var $tableRow = $('<tr>',{
-       'data-index': id
-   });
-    var $checkbox_td = $('<td>',{
+    var $tableRow = $('<tr>', {
+        'data-index': id
+    });
+    var $checkbox_td = $('<td>', {
         class: "checkbox_td"
     })
-    var $checkbox = $('<input>',{
+    var $checkbox = $('<input>', {
         type: "checkbox",
-        class: "checkbox",
-        value: "complete"
+        class: "checkbox glyphicon glyphicon-unchecked",
+        value: complete
     })
     var $task_td = $("<td>", {
         class: "task_td",
-        onclick: "showTask("+id+")"
+        onclick: "showTask(" + id + ")"
     }).text(task);
     var $date_td = $("<td>", {
         class: "date_td",
-        onclick: "showTask("+id+")"
+        onclick: "showTask(" + id + ")"
     }).text(date);
     var $priority_td = $("<td>", {
         class: "priority_td",
-        onclick: "showTask("+id+")"
+        onclick: "showTask(" + id + ")"
     }).text(priority);
-    var $deleteTask_td = $("<td>",{
+    var $deleteTask_td = $("<td>", {
         class: "delete_td"
     })
-    var $deleteTask_btn = $("<button>",{
+    var $deleteTask_btn = $("<button>", {
         display: "none",
         type: "button",
         class: "btn btn-xs btn-danger deleteTaskBtn",
@@ -117,7 +130,7 @@ function addTask(){
     }).text('X');
     $($deleteTask_td).append($deleteTask_btn).hide();
     $($checkbox_td).append($checkbox);
-    var taskDOM = $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td,$deleteTask_td);
+    var taskDOM = $($tableRow).append($checkbox_td, $task_td, $date_td, $priority_td, $deleteTask_td);
     var todo_item = {
         id: id,
         complete: complete,
@@ -133,11 +146,8 @@ function addTask(){
 
 }
 
-function create_tas_dom(){
 
-}
-
-function addClicked(){
+function addClicked() {
     taskinput = '';
     checktaskInput();
     $('input').val('');
@@ -146,17 +156,17 @@ function addClicked(){
     $('#addModal').modal('show');
 }
 
-function showTask(id){
-    for(var i in todo_item_array){
-        if(todo_item_array[i].id == id){
+function showTask(id) {
+    for (var i in todo_item_array) {
+        if (todo_item_array[i].id == id) {
             var todoObj = todo_item_array[i];
         }
     }
-    if(todoObj === undefined) {
+    if (todoObj === undefined) {
         console.log("something is wrong with me...");
         return;
     }
-    $("#task").html("Task: "+todoObj.task);
+    $("#task").html("Task: " + todoObj.task);
     $("#status_p").html("Status:" + todoObj.complete);
     $("#date_p").html("Complete by: " + todoObj.date);
     $("#priority_p").html("Priority: " + todoObj.priority);
@@ -166,44 +176,36 @@ function showTask(id){
     $('#itemModal').modal('show');
 }
 
-function deleteTask(id){
-    console.log("delete clicked",id);
-    $('tr[data-index='+id+']').remove();
-    for(var i in todo_item_array){
-        if(todo_item_array[i].id === id){
-            console.log("before splice:",todo_item_array)
-            todo_item_array.splice(i,1);
-            console.log("after splice:",todo_item_array);
+function deleteTask(id) {
+    console.log("delete clicked", id);
+    $('tr[data-index=' + id + ']').remove();
+    for (var i in todo_item_array) {
+        if (todo_item_array[i].id === id) {
+            console.log("before splice:", todo_item_array)
+            todo_item_array.splice(i, 1);
+            console.log("after splice:", todo_item_array);
         }
     }
 }
 
-function edit(){
-    if(todo_item_array.length > 0) {
+function edit() {
+    if (todo_item_array.length > 0) {
         console.log("edit clicked");
         $(".delete_td").toggle('slide');
     }
 }
 
-function update_table(){
+function update_table() {
     console.log('update Table pre-ajax');
     $.ajax({ //this page sends data to the login_handler.php page
-        url:"data_handler.php",
+        url: "data_handler.php",
         method: "POST",
         cache: "false",
-        data : {},
+        data: {},
         dataType: 'json',
-        success: function(response){
+        success: function (response) {
             console.log(response);
         }
     });
 
 }
-
-$(document).ready(function(){
-
-    $('.content_container').on('click', '#update_list',function(){
-        update_table();
-    });
-
-});

@@ -1,7 +1,7 @@
 <table class="table table-hover">
     <thead>
     <tr>
-        <th class="checkbox_th">✓</th>
+        <th class="checkbox_th"><span class="glyphicon glyphicon-check" aria-hidden="true"></span></th>
         <th>Task
             <button class="addBtn btn btn-xs btn-success" type="button" onclick="addClicked()">+</button>
             <button class="editBtn btn btn-xs btn-warning" type="button" onclick="edit()" >Edit</button>
