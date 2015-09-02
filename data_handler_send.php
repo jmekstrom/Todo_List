@@ -1,16 +1,19 @@
 <?php
 session_start();
-print_r($_SESSION);
 
 if(!empty($_SESSION['user_id'])){
     print_r($_POST);
-    $complete = "0"
+    $complete = "0";
+    $created_datetime = "0000-00-00";
+    $details = "details of task";
+    $due_date = "0000-00-00";
+    $id = null;
+    $priority = "low";
+    $timestamp = "0000-00-00";
     $task= "test item title";
-    $details = "details"
-    $timestamp = "0000-00-00"
     $user_id = $_SESSION['user_id'];
     require('mysql_connect.php');
-    $query = "INSERT INTO `tdl_item_list`(`complete`,`created_datetime`, `details`, `due_date`, `id`, `priority`,`task`, `user_id`) VALUES ($complete, $created_datetime, )";
+    $query = "INSERT INTO `tdl_item_list`(`id`, `task`, `details`, `created_datetime`, `user_id`, `complete`, `priority`, `due_date`) VALUES (null,'this is a task','the details','0000-00-00','1','0','low','0000-00-00')";
     $results = mysqli_query($conn, $query);
     if(mysqli_affected_rows($conn) > 0){
         print('mysqli_affected_rows is true');

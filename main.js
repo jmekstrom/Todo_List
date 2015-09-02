@@ -237,10 +237,10 @@ function add_item_db(){
        url: 'data_handler_send.php',
         method: "POST",
         cache: false,
-        data: {
-
-        },
+        data: {},
         dataType: 'json',
-        success: function
+        success: function(response){
+            console.log(response);
+        }
     });
 }
