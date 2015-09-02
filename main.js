@@ -1,4 +1,5 @@
 var taskinput = $("#taskInput").val();
+
 $(document).ready(function () {
     $('.content_container').on('click', '#update_list', function () {
         update_table();
@@ -17,8 +18,6 @@ $(document).ready(function () {
             $(this).parent().siblings().removeClass("crossout");
         }
     });
-
-
 })
 
 function checktaskInput() {
@@ -79,23 +78,41 @@ function logout_ajaxCall() {
     })
 }
 
-var todo_item_array = [];
-var id = 0;
-var modal_td_DOM = $("<td>", {
+var todo_item_array=[];
+var id = 1;
+var modal_td_DOM = $("<td>",{
     "data-toggle": "modal",
     "data-target": "itemModal"
-})
+});
 
 function addTask() {
 
     $(".delete_td").hide("slide");
     id++;
-    var task = $("#taskInput").val();
-    var date = $("#dateInput").val();
+    var task     = $("#taskInput").val();
+    var due_date     = $("#dateInput").val();
     var priority = $("#priorityInput").val();
     var details = $("#detailsInput").val();
     var created_datetime = new Date().getTime();
     var complete = "incomplete";
+    var todo_item = {
+        id: id,
+        complete: complete,
+        task: task,
+        due_date: due_date,
+        priority: priority,
+        details: details,
+        created_datetime: created_datetime,
+        //DOM: taskDOM
+    }
+    create_task_dom(todo_item);
+    todo_item_array.push(todo_item);
+    console.log("todo_item_array inside of addTask",todo_item_array);
+
+}
+
+function create_task_dom(todo_item_object){
+    console.log("to do item object",todo_item_object);
     var $tableRow = $('<tr>', {
         'data-index': id
     });
@@ -105,49 +122,36 @@ function addTask() {
     var $checkbox = $('<input>', {
         type: "checkbox",
         class: "checkbox glyphicon glyphicon-unchecked",
-        value: complete
+        value: todo_item_object.complete
     })
     var $task_td = $("<td>", {
         class: "task_td",
         onclick: "showTask(" + id + ")"
-    }).text(task);
+    }).text(todo_item_object.task);
     var $date_td = $("<td>", {
         class: "date_td",
         onclick: "showTask(" + id + ")"
-    }).text(date);
+    }).text(todo_item_object.due_date);
     var $priority_td = $("<td>", {
         class: "priority_td",
         onclick: "showTask(" + id + ")"
-    }).text(priority);
+    }).text(todo_item_object.priority);
     var $deleteTask_td = $("<td>", {
         class: "delete_td"
     })
     var $deleteTask_btn = $("<button>", {
-        display: "none",
         type: "button",
         class: "btn btn-xs btn-danger deleteTaskBtn",
         onclick: "deleteTask(" + id + ")"
     }).text('X');
     $($deleteTask_td).append($deleteTask_btn).hide();
     $($checkbox_td).append($checkbox);
-    var taskDOM = $($tableRow).append($checkbox_td, $task_td, $date_td, $priority_td, $deleteTask_td);
-    var todo_item = {
-        id: id,
-        complete: complete,
-        task: task,
-        date: date,
-        priority: priority,
-        details: details,
-        created_datetime: created_datetime,
-        DOM: taskDOM
-    }
-    todo_item_array.push(todo_item);
-    $('.tableBottom').before($tableRow);
-
+    $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td,$deleteTask_td);
+    $('tbody').append($tableRow);
+    //var taskDOM = $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td,$deleteTask_td);
 }
 
-
-function addClicked() {
+function addClicked(){
     taskinput = '';
     checktaskInput();
     $('input').val('');
@@ -156,9 +160,11 @@ function addClicked() {
     $('#addModal').modal('show');
 }
 
-function showTask(id) {
-    for (var i in todo_item_array) {
-        if (todo_item_array[i].id == id) {
+
+function showTask(id){
+    console.log(todo_item_array[0].id);
+    for(var i in todo_item_array){
+        if(todo_item_array[i].id == id){
             var todoObj = todo_item_array[i];
         }
     }
@@ -168,7 +174,7 @@ function showTask(id) {
     }
     $("#task").html("Task: " + todoObj.task);
     $("#status_p").html("Status:" + todoObj.complete);
-    $("#date_p").html("Complete by: " + todoObj.date);
+    $("#date_p").html("Complete by: " + todoObj.due_date);
     $("#priority_p").html("Priority: " + todoObj.priority);
     $("#details_p").html("Extra Details: " + todoObj.details);
     $("#created_p").html("Created: " + todoObj.created_datetime);
@@ -195,7 +201,9 @@ function edit() {
     }
 }
 
-function update_table() {
+
+
+function update_table(){
     console.log('update Table pre-ajax');
     $.ajax({ //this page sends data to the login_handler.php page
         url: "data_handler.php",
@@ -205,6 +213,16 @@ function update_table() {
         dataType: 'json',
         success: function (response) {
             console.log(response);
+            console.log(response.length);
+            for(var i = 0; i< response.length; i++){
+                todo_item_array.push(response[i]);
+            }
+            console.log("todo_item_array inside of update_table: " , todo_item_array);
+            $('tbody').empty();
+            for(var j = 0; j < todo_item_array.length; j++){
+                console.log(todo_item_array[j].date);
+                create_task_dom(todo_item_array[j]);
+            }
         }
     });
 

@@ -11,15 +11,17 @@
         <th style="display: none" class="delete_td"></th>
     </tr>
     </thead>
-    <tfoot>
-    <tr class="tableBottom">
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    </tfoot>
+
     <tbody>
+
     </tbody>
+    <tfoot>
+        <tr class="tableBottom">
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tfoot>
 </table>
 <button id="update_list">Update List from db</button>
 <!-- Modal -->
