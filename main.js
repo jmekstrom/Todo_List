@@ -99,7 +99,6 @@ function addTask() {
     var created_datetime = new Date().getTime();
     var complete = "incomplete";
     var todo_item = {
-        id: id,
         complete: complete,
         task: task,
         due_date: due_date,
@@ -108,7 +107,8 @@ function addTask() {
         created_datetime: created_datetime,
         //DOM: taskDOM
     }
-    create_task_dom(todo_item);
+    add_item_db(todo_item);
+    //create_task_dom(todo_item);
     todo_item_array.push(todo_item);
     console.log("todo_item_array inside of addTask",todo_item_array);
 
@@ -231,13 +231,15 @@ function update_dom_table(){
 
 }
 
-function add_item_db(){
+function add_item_db(task_object){
     console.log('add_item_db pre-ajax');
     $.ajax({
        url: 'data_handler_send.php',
         method: "POST",
         cache: false,
-        data: {},
+        data: {
+          task_data: task_object
+        },
         dataType: 'json',
         success: function(response){
             console.log(response);

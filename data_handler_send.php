@@ -2,7 +2,7 @@
 session_start();
 
 if(!empty($_SESSION['user_id'])){
-    print_r($_POST);
+    print($_POST["task_data"]["complete"]);
     $complete = "0";
     $created_datetime = "0000-00-00";
     $details = "details of task";
