@@ -122,7 +122,7 @@ function create_task_dom(todo_item_object){
     var $date_td = $("<td>", {
         class: "date_td",
         onclick: "showTask("+id+")"
-    }).text(todo_item_object.date);
+    }).text(todo_item_object.due_date);
     var $priority_td = $("<td>", {
         class: "priority_td",
         onclick: "showTask("+id+")"
@@ -153,8 +153,9 @@ function addClicked(){
 }
 
 function showTask(id){
+    console.log(todo_item_array[0].id);
     for(var i in todo_item_array){
-        if(todo_item_array[i].id == id){
+        if(todo_item_array[i].id-1 == id){
             var todoObj = todo_item_array[i];
         }
     }
@@ -207,6 +208,7 @@ function update_table(){
             }
             console.log("todo_item_arry inside of update_table: " , todo_item_array);
             for(var j = 0; j < todo_item_array.length; j++){
+                console.log(todo_item_array[j].date);
                 create_task_dom(todo_item_array[j]);
             }
         }
