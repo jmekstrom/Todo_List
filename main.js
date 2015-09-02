@@ -1,12 +1,16 @@
 var taskinput = $("#taskInput").val();
+
 $(document).ready(function () {
     taskinput = $("#taskInput").val();
     checktaskInput();
     $('#addModal').keyup(function () {
         taskinput = $("#taskInput").val();
         checktaskInput();
-    })
-})
+    });
+    $('.content_container').on('click', '#update_list',function(){
+        update_table();
+    });
+});
 
 function checktaskInput() {
     if (taskinput === undefined || taskinput == '') {
@@ -71,7 +75,7 @@ var id = 0;
 var modal_td_DOM = $("<td>",{
     "data-toggle": "modal",
     "data-target": "itemModal"
-})
+});
 
 function addTask(){
 
@@ -83,29 +87,45 @@ function addTask(){
     var details  = $("#detailsInput").val();
     var created_datetime = new Date().getTime();
     var complete = "incomplete";
-   var $tableRow = $('<tr>',{
-       'data-index': id
-   });
+    var todo_item = {
+        id: id,
+        complete: complete,
+        task: task,
+        date: date,
+        priority: priority,
+        details: details,
+        created_datetime: created_datetime,
+        //DOM: taskDOM
+    }
+    create_task_dom(todo_item);
+    todo_item_array.push(todo_item);
+
+}
+
+function create_task_dom(todo_item_object){
+    var $tableRow = $('<tr>',{
+        'data-index': id
+    });
     var $checkbox_td = $('<td>',{
         class: "checkbox_td"
-    })
+    });
     var $checkbox = $('<input>',{
         type: "checkbox",
         class: "checkbox",
         value: "complete"
-    })
+    });
     var $task_td = $("<td>", {
         class: "task_td",
         onclick: "showTask("+id+")"
-    }).text(task);
+    }).text(todo_item_object.task);
     var $date_td = $("<td>", {
         class: "date_td",
         onclick: "showTask("+id+")"
-    }).text(date);
+    }).text(todo_item_object.date);
     var $priority_td = $("<td>", {
         class: "priority_td",
         onclick: "showTask("+id+")"
-    }).text(priority);
+    }).text(todo_item_object.priority);
     var $deleteTask_td = $("<td>",{
         class: "delete_td"
     })
@@ -117,24 +137,9 @@ function addTask(){
     }).text('X');
     $($deleteTask_td).append($deleteTask_btn).hide();
     $($checkbox_td).append($checkbox);
-    var taskDOM = $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td,$deleteTask_td);
-    var todo_item = {
-        id: id,
-        complete: complete,
-        task: task,
-        date: date,
-        priority: priority,
-        details: details,
-        created_datetime: created_datetime,
-        DOM: taskDOM
-    }
-    todo_item_array.push(todo_item);
     $('.tableBottom').before($tableRow);
-
-}
-
-function create_tas_dom(){
-
+    $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td,$deleteTask_td);
+    //var taskDOM = $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td,$deleteTask_td);
 }
 
 function addClicked(){
@@ -199,11 +204,3 @@ function update_table(){
     });
 
 }
-
-$(document).ready(function(){
-
-    $('.content_container').on('click', '#update_list',function(){
-        update_table();
-    });
-
-});
