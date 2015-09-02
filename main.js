@@ -18,9 +18,6 @@ $(document).ready(function () {
             $(this).parent().siblings().removeClass("crossout");
         }
     });
-    $('.content_container').on('click', '#addtaskBtn', function () {
-        add_item_db();
-    });
 })
 
 function checktaskInput() {
