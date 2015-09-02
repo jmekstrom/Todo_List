@@ -2,14 +2,14 @@ var taskinput = $("#taskInput").val();
 
 $(document).ready(function () {
     $('.content_container').on('click', '#update_list', function () {
-        update_table();
+        update_dom_table();
     });
     taskinput = $("#taskInput").val();
     checktaskInput();
     $('#addModal').keyup(function () {
         taskinput = $("#taskInput").val();
         checktaskInput();
-    })
+    });
     $('tbody').on('change', '.checkbox', function () {
         if ($(this).is(':checked')) {
             $(this).parent().siblings().addClass("crossout");
@@ -17,6 +17,9 @@ $(document).ready(function () {
         else {
             $(this).parent().siblings().removeClass("crossout");
         }
+    });
+    $('.content_container').on('click', '#addtaskBtn', function () {
+        add_item_db();
     });
 })
 
@@ -203,8 +206,8 @@ function edit() {
 
 
 
-function update_table(){
-    console.log('update Table pre-ajax');
+function update_dom_table(){
+    console.log('update dom Table pre-ajax');
     $.ajax({ //this page sends data to the login_handler.php page
         url: "data_handler_receive.php",
         method: "POST",
@@ -217,7 +220,7 @@ function update_table(){
             for(var i = 0; i< response.length; i++){
                 todo_item_array.push(response[i]);
             }
-            console.log("todo_item_array inside of update_table: " , todo_item_array);
+            console.log("todo_item_array inside of update_dom_table: " , todo_item_array);
             $('tbody').empty();
             for(var j = 0; j < todo_item_array.length; j++){
                 console.log(todo_item_array[j].date);
@@ -226,4 +229,18 @@ function update_table(){
         }
     });
 
+}
+
+function add_item_db(){
+    console.log('add_item_db pre-ajax');
+    $.ajax({
+       url: 'data_handler_send.php',
+        method: "POST",
+        cache: false,
+        data: {
+
+        },
+        dataType: 'json',
+        success: function
+    });
 }
