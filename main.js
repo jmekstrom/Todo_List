@@ -71,7 +71,7 @@ function logout_ajaxCall(){
 }
 
 var todo_item_array=[];
-var id = 0;
+var id = 1;
 var modal_td_DOM = $("<td>",{
     "data-toggle": "modal",
     "data-target": "itemModal"
@@ -138,8 +138,8 @@ function create_task_dom(todo_item_object){
     }).text('X');
     $($deleteTask_td).append($deleteTask_btn).hide();
     $($checkbox_td).append($checkbox);
-    $('.tableBottom').before($tableRow);
     $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td,$deleteTask_td);
+    $('tbody').append($tableRow);
     //var taskDOM = $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td,$deleteTask_td);
 }
 
@@ -155,7 +155,7 @@ function addClicked(){
 function showTask(id){
     console.log(todo_item_array[0].id);
     for(var i in todo_item_array){
-        if(todo_item_array[i].id-1 == id){
+        if(todo_item_array[i].id == id){
             var todoObj = todo_item_array[i];
         }
     }
@@ -192,6 +192,8 @@ function edit(){
     }
 }
 
+
+
 function update_table(){
     console.log('update Table pre-ajax');
     $.ajax({ //this page sends data to the login_handler.php page
@@ -206,7 +208,8 @@ function update_table(){
             for(var i = 0; i< response.length; i++){
                 todo_item_array.push(response[i]);
             }
-            console.log("todo_item_arry inside of update_table: " , todo_item_array);
+            console.log("todo_item_array inside of update_table: " , todo_item_array);
+            $('tbody').empty();
             for(var j = 0; j < todo_item_array.length; j++){
                 console.log(todo_item_array[j].date);
                 create_task_dom(todo_item_array[j]);

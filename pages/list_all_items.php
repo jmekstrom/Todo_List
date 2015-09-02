@@ -12,12 +12,15 @@
     </tr>
     </thead>
     <tbody>
-    <tr class="tableBottom">
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
+
     </tbody>
+    <tfoot>
+        <tr class="tableBottom">
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tfoot>
 </table>
 <button id="update_list">Update List from db</button>
 <!-- Modal -->
