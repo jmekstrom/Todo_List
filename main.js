@@ -97,7 +97,7 @@ function addTask() {
     var priority = $("#priorityInput").val();
     var details = $("#detailsInput").val();
     var created_datetime = new Date().getTime();
-    var complete = "incomplete";
+    var complete = 0;
     var todo_item = {
         complete: complete,
         task: task,
