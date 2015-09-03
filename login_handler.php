@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 $username = $_POST['username'];
 $password = sha1($_POST['password']);
 require('mysql_connect.php');
