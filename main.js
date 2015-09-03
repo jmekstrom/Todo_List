@@ -82,6 +82,7 @@ function logout_ajaxCall() {
 }
 
 var todo_item_array=[];
+var id = 1;
 
 function addTask() {
     $(".operation_td").hide("slide");
