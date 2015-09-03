@@ -3,8 +3,8 @@
     <tr>
         <th class="checkbox_th"><span class="glyphicon glyphicon-check" aria-hidden="true"></span></th>
         <th>Task
-            <button class="addBtn btn btn-xs btn-success" type="button" onclick="addClicked()">+</button>
-            <button class="editBtn btn btn-xs btn-warning" type="button" onclick="edit()" >Edit</button>
+            <button class="nofocus addBtn btn btn-xs btn-success" type="button" onclick="addClicked()">+</button>
+            <button class="nofocus editBtn btn btn-xs btn-warning" type="button" onclick="edit()" >Edit</button>
         </th>
         <th>Date</th>
         <th>Priority</th>
@@ -23,7 +23,7 @@
         </tr>
     </tfoot>
 </table>
-<button id="update_list">Update List from db</button>
+
 <!-- Modal -->
 <div id="addModal" class="modal fade" role="dialog">
     <div class="modal-dialog">

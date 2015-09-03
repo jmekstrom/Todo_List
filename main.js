@@ -1,6 +1,7 @@
 var taskinput = $("#taskInput").val();
 
 $(document).ready(function () {
+    update_dom_table();
     $('.content_container').on('click', '#update_list', function () {
         update_dom_table();
     });
@@ -50,6 +51,7 @@ function login_ajaxCall() {
             if (response.success) {
                 console.log('IT WORKED')
                 load_content('list_all_items');
+                update_dom_table();
             }
         }
     });
@@ -138,14 +140,14 @@ function create_task_dom(todo_item_object){
     })
     var $editTask_btn = $("<button>", {
         type: "button",
-        class: "btn btn-xs btn-warning editTaskBtn",
+        class: "nofocus btn btn-xs btn-warning editTaskBtn",
         onclick: "editTask("+id+")"
     }).append($('<span>',{
         class: 'glyphicon glyphicon-edit'
     }));
     var $deleteTask_btn = $("<button>", {
         type: "button",
-        class: "btn btn-xs btn-danger deleteTaskBtn",
+        class: "nofocus btn btn-xs btn-danger deleteTaskBtn",
         onclick: "deleteTask(" + id + ")"
     }).text('X');
     $($operation_td).append($editTask_btn,$deleteTask_btn).hide();
@@ -229,7 +231,6 @@ function submitChanges(task,i){
     todo_item_array[index_of_task_to_edit].priority = $("#editpriorityInput").val();
     todo_item_array[index_of_task_to_edit].details = $("#editdetailsInput").val();
     //need to fix this functionality but update_table works for now
-    update_table();
 }
 
 function update_dom_table(){
@@ -242,8 +243,9 @@ function update_dom_table(){
         data: {},
         dataType: 'json',
         success: function (response) {
-            console.log(response);
+            console.log("table from database",response);
             console.log(response.length);
+            todo_item_array = [];
             for(var i = 0; i< response.length; i++){
                 todo_item_array.push(response[i]);
             }
@@ -276,6 +278,7 @@ function add_item_db(task_object){
         dataType: 'json',
         success: function(response){
             console.log(response);
+            update_dom_table();
         }
     });
 }
