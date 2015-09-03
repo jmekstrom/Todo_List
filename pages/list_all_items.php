@@ -8,7 +8,7 @@
         </th>
         <th>Date</th>
         <th>Priority</th>
-        <th style="display: none" class="delete_td"></th>
+        <th style="display: none" class="operation_td"></th>
     </tr>
     </thead>
 
@@ -95,6 +95,59 @@
             </div>
             <div class="modal-footer">
 
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="editModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Task</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Task" id="edittaskInput">
+                </div>
+
+                <div class="input-group form-group date">
+                    <input type="text" class="form-control" placeholder="Date & Time" id="editdateInput">
+
+                    <div class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $('#dateInput').datetimepicker({
+                            orientation: "left bottom",
+                            format: 'm/d/yy H:iip'
+                        });
+
+                    });
+                </script>
+
+                <div class="form-group">
+                    <select class="form-control" id="editpriorityInput">
+                        <option></option>
+                        <option>Low</option>
+                        <option>Medium</option>
+                        <option>High</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <textarea class="form-control" rows="5" id="editdetailsInput" placeholder="Extra details..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer" id="edit-modal-footer">
+                <button type="button" id='submitChangesBtn' class="btn btn-success" data-dismiss="modal" onclick="submitChanges()">
+                    Submit
+                </button>
             </div>
         </div>
 
