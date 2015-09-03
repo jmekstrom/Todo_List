@@ -2,14 +2,14 @@ var taskinput = $("#taskInput").val();
 
 $(document).ready(function () {
     $('.content_container').on('click', '#update_list', function () {
-        update_table();
+        update_dom_table();
     });
     taskinput = $("#taskInput").val();
     checktaskInput();
     $('#addModal').keyup(function () {
         taskinput = $("#taskInput").val();
         checktaskInput();
-    })
+    });
     $('tbody').on('change', '.checkbox', function () {
         var id = $(this).parent().parent().attr("data-index");
         if ($(this).is(':checked')) {
@@ -82,11 +82,6 @@ function logout_ajaxCall() {
 }
 
 var todo_item_array=[];
-var id = 1;
-var modal_td_DOM = $("<td>",{
-    "data-toggle": "modal",
-    "data-target": "itemModal"
-});
 
 function addTask() {
     $(".operation_td").hide("slide");
@@ -96,7 +91,7 @@ function addTask() {
     var priority = $("#priorityInput").val();
     var details = $("#detailsInput").val();
     var created_datetime = new Date().getTime();
-    var complete = "incomplete";
+    var complete = 0;
     var todo_item = {
         complete: complete,
         task: task,
@@ -105,7 +100,8 @@ function addTask() {
         details: details,
         created_datetime: created_datetime,
     }
-    create_task_dom(todo_item);
+    add_item_db(todo_item);
+    //create_task_dom(todo_item);
     todo_item_array.push(todo_item);
     console.log("todo_item_array inside of addTask",todo_item_array);
 
@@ -235,11 +231,11 @@ function submitChanges(task,i){
     update_table();
 }
 
-function update_table(){
+function update_dom_table(){
     $(".operation_td").hide("slide");
-    console.log('update Table pre-ajax');
+    console.log('update dom Table pre-ajax');
     $.ajax({ //this page sends data to the login_handler.php page
-        url: "data_handler.php",
+        url: "data_handler_receive.php",
         method: "POST",
         cache: "false",
         data: {},
@@ -250,7 +246,7 @@ function update_table(){
             for(var i = 0; i< response.length; i++){
                 todo_item_array.push(response[i]);
             }
-            console.log("todo_item_array inside of update_table: " , todo_item_array);
+            console.log("todo_item_array inside of update_dom_table: " , todo_item_array);
             $('tbody').empty();
             for(var j = 0; j < todo_item_array.length; j++){
                 console.log(todo_item_array[j].date);
@@ -261,9 +257,24 @@ function update_table(){
 
 }
 
-function complete(id,value){
-    for(var i in todo_item_array){
-        if
+function complete(id,value) {
+    for (var i in todo_item_array) {
+        //update_table();
     }
-    //update_table();
+}
+
+function add_item_db(task_object){
+    console.log('add_item_db pre-ajax');
+    $.ajax({
+       url: 'data_handler_send.php',
+        method: "POST",
+        cache: false,
+        data: {
+          task_data: task_object
+        },
+        dataType: 'json',
+        success: function(response){
+            console.log(response);
+        }
+    });
 }
