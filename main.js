@@ -1,4 +1,5 @@
 var taskinput = $("#taskInput").val();
+var editState = false;
 
 $(document).ready(function () {
     update_dom_table();
@@ -20,7 +21,6 @@ $(document).ready(function () {
             complete(id,0);
         }
     });
-    editState = false;
 })
 
 function checktaskInput() {
@@ -192,8 +192,14 @@ function showTask(id){
         console.log("something is wrong with me...");
         return;
     }
+    if(todoObj.complete == 1){
+        var status = "Complete";
+    }
+    else{
+        var status = "Incomplete";
+    }
     $("#task").html("Task: " + todoObj.task);
-    $("#status_p").html("Status:" + todoObj.complete);
+    $("#status_p").html("Status: " + status);
     $("#date_p").html("Complete by: " + todoObj.due_date);
     $("#priority_p").html("Priority: " + todoObj.priority);
     $("#details_p").html("Extra Details: " + todoObj.details);
@@ -292,12 +298,14 @@ function update_dom_table(){
         data: {},
         dataType: 'json',
         success: function (response) {
-            if(response.success && response.data.length > 0) {
+            if(response.success && !$.isEmptyObject(response.data)) {
                 todo_items = {};
-                for (var i = 0; i < response.data.length; i++) {
-                    var id = response.data[i].id;
-                    todo_items[id] = response.data[i];
+                console.log(response.data);
+                for (var i in response.data) {
+                    var order = response.data[i];
+                    todo_items[i] = order;
                 }
+                console.log("Data in order", todo_items);
                 console.log("todo_items inside of update_dom_table: ", todo_items);
                 $('tbody').empty();
                 for (var j in todo_items) {
@@ -316,8 +324,14 @@ function update_dom_table(){
 }
 
 function complete(id,value) {
-    todo_items[id].complete = value;
-    var task_object = todo_items[id]
+    for(var i in todo_items){
+        console.log(i,todo_items[i]);
+        if(todo_items[i].id == id){
+            var task = i;
+        }
+    }
+    todo_items[task].complete = value;
+    var task_object = todo_items[task];
     //console.log("complete function", todo_items[id])
     $.ajax({
         url: 'data_handler_complete.php',
