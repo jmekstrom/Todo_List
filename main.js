@@ -1,5 +1,11 @@
 var taskinput = $("#taskInput").val();
 
+/*****************
+ *
+ * document ready
+ * Functions called here: update_dom_table, checktaskInput, complete
+ */
+
 $(document).ready(function () {
     update_dom_table();
     $('.content_container').on('click', '#update_list', function () {
@@ -21,7 +27,16 @@ $(document).ready(function () {
         }
     });
     editState = false;
-})
+});
+
+/*********************
+ * Function Name: checktaskInput;
+ * @purpose: check to see if anything has been entered into the input boxes,
+ *           if so allow user to add information to dom/db;
+ * @params: N/A;
+ * @globals: taskinput;
+ * @return: none;
+ */
 
 function checktaskInput() {
     if (taskinput === undefined || taskinput == '') {
@@ -32,11 +47,19 @@ function checktaskInput() {
     }
 }
 
+/*********************
+ * Function Name: login_ajaxCall;
+ * @purpose: Send data to login_handler.php file which then checks a database for the user;
+ * @params: N/A;
+ * @globals: N/A;
+ * @return: N/A;
+ */
+
 function login_ajaxCall() {
     console.log("login before ajax");
     var username = $('#username').val();
     var password = $('#password').val();
-    $.ajax({ //this page sends data to the login_handler.php page
+    $.ajax({
         url: "login_handler.php",
         method: "POST",
         cache: "false",
@@ -56,6 +79,14 @@ function login_ajaxCall() {
     });
 }
 
+/*********************
+ * Function Name: load_content;
+ * @purpose: Loads the specific page that is required for a given situation. See login_ajaxCall for eg;
+ * @params: url;
+ * @globals: N/A;
+ * @return: N/A;
+ */
+
 function load_content(url) {
     console.log("loading: " + url + ".php");
     $.ajax({
@@ -68,6 +99,14 @@ function load_content(url) {
         }
     })
 }
+
+/*********************
+ * Function Name: logout_ajaxCall;
+ * @purpose: ajax call for logout.php which destroys the session and logs the user out;
+ * @params: N/A;
+ * @globals: N/A;
+ * @return: N/A;
+ */
 
 function logout_ajaxCall() {
     $.ajax({
