@@ -22,6 +22,7 @@ $(document).ready(function () {
             complete(id,0);
         }
     });
+    editState = false;
 })
 
 function checktaskInput() {
@@ -143,10 +144,16 @@ function create_task_dom(todo_item_object){
         class: "nofocus btn btn-xs btn-danger deleteTaskBtn",
         onclick: "deleteTask(" + todo_item_object.id + ")"
     }).text('X');
-    $($operation_td).append($editTask_btn,$deleteTask_btn).hide();
+    $($operation_td).append($editTask_btn,$deleteTask_btn)
     $($checkbox_td).append($checkbox);
     $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td,$operation_td);
     $('tbody').append($tableRow);
+    if(editState) {
+        $(".operation_td").show();
+    }
+    else{
+        $(".operation_td").hide();
+    }
     //var taskDOM = $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td,$deleteTask_td);
 }
 
@@ -205,7 +212,13 @@ function deleteTask(id) {
 function edit() {
     if (!$.isEmptyObject(todo_items)) {
         console.log("edit clicked");
-        $(".operation_td").toggle('slide');
+        editState = !editState;
+        if(editState) {
+            $(".operation_td").show('slide');
+        }
+        else{
+            $(".operation_td").hide('slide');
+        }
     }
 }
 
@@ -235,7 +248,7 @@ function submitChanges(task,i){
 }
 
 function update_dom_table(){
-    $(".operation_td").hide("slide");
+    //$(".operation_td").hide("slide");
     console.log('update dom Table pre-ajax');
     $.ajax({ //this page sends data to the login_handler.php page
         url: "data_handler_receive.php",
