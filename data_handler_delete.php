@@ -9,7 +9,7 @@
     if(mysqli_affected_rows($conn) > 0){
         $return["success"] = "You deleted the object with an id of: $obj_id";
     }else {
-        $return["success"] = "something went wrong";
+        $return["success"] = false;
 
     }
 

@@ -193,8 +193,11 @@ function deleteTask(id) {
         dataType: "json",
         success: function (response) {
             console.log("response", response);
+            if(response.success){
+                update_dom_table();
+            }
         }
-    })
+    });
 
 
 }
