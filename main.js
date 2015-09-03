@@ -283,9 +283,18 @@ function update_dom_table(){
 }
 
 function complete(id,value) {
-    for (var i in todo_items) {
-        //update_table();
-    }
+    console.log("complete function", todo_items[id],value)
+    $.ajax({
+        url: "data_handler_complete.php",
+        method: "POST",
+        cache: false,
+        data: {
+            task_data: todo_items[id]
+        },
+        success: function(response){
+            console.log(response);
+        }
+    })
 }
 
 function add_item_db(task_object){
