@@ -130,14 +130,38 @@ tr td:last-child {
     font-size: 12px;
 }
 
+.operation_td{
+    position: relative;
+    width: 70px;
+}
+
+.deleteTaskBtn, .editTaskBtn {
+    position: absolute;
+    top: 5px;
+}
+
 .deleteTaskBtn{
-    font-size: 10px;
-    height: 20px;
-    width: 20px;
+    left: 30px;
+    padding-top: 2px;
+    font-size: 15px;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    border-radius: 100%;
+    font-style: bold;
+}
+
+.editTaskBtn {
+    left: 0;
+    padding-bottom: 2px;
+    font-size: 15px;
+    height: 24px;
+    width: 24px;
     line-height: 20px;
     border-radius: 100%;
     font-style: bold;
 }
+
 
 
 .task_td {
@@ -170,4 +194,10 @@ input[type=checkbox].glyphicon {
 
 .crossout{
     text-decoration: line-through;
+}
+
+.editBtn{
+    height: 20px;
+    padding-top: 2px;
+    border-radius: 5px;
 }

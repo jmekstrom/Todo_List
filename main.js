@@ -11,11 +11,14 @@ $(document).ready(function () {
         checktaskInput();
     })
     $('tbody').on('change', '.checkbox', function () {
+        var id = $(this).parent().parent().attr("data-index");
         if ($(this).is(':checked')) {
             $(this).parent().siblings().addClass("crossout");
+            complete(id,1);
         }
         else {
             $(this).parent().siblings().removeClass("crossout");
+            complete(id,0);
         }
     });
 })
@@ -86,8 +89,7 @@ var modal_td_DOM = $("<td>",{
 });
 
 function addTask() {
-
-    $(".delete_td").hide("slide");
+    $(".operation_td").hide("slide");
     id++;
     var task     = $("#taskInput").val();
     var due_date     = $("#dateInput").val();
@@ -96,14 +98,12 @@ function addTask() {
     var created_datetime = new Date().getTime();
     var complete = "incomplete";
     var todo_item = {
-        id: id,
         complete: complete,
         task: task,
         due_date: due_date,
         priority: priority,
         details: details,
         created_datetime: created_datetime,
-        //DOM: taskDOM
     }
     create_task_dom(todo_item);
     todo_item_array.push(todo_item);
@@ -136,17 +136,24 @@ function create_task_dom(todo_item_object){
         class: "priority_td",
         onclick: "showTask(" + id + ")"
     }).text(todo_item_object.priority);
-    var $deleteTask_td = $("<td>", {
-        class: "delete_td"
+    var $operation_td = $("<td>", {
+        class: "operation_td"
     })
+    var $editTask_btn = $("<button>", {
+        type: "button",
+        class: "btn btn-xs btn-warning editTaskBtn",
+        onclick: "editTask("+id+")"
+    }).append($('<span>',{
+        class: 'glyphicon glyphicon-edit'
+    }));
     var $deleteTask_btn = $("<button>", {
         type: "button",
         class: "btn btn-xs btn-danger deleteTaskBtn",
         onclick: "deleteTask(" + id + ")"
     }).text('X');
-    $($deleteTask_td).append($deleteTask_btn).hide();
+    $($operation_td).append($editTask_btn,$deleteTask_btn).hide();
     $($checkbox_td).append($checkbox);
-    $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td,$deleteTask_td);
+    $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td,$operation_td);
     $('tbody').append($tableRow);
     //var taskDOM = $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td,$deleteTask_td);
 }
@@ -187,9 +194,10 @@ function deleteTask(id) {
     $('tr[data-index=' + id + ']').remove();
     for (var i in todo_item_array) {
         if (todo_item_array[i].id === id) {
-            console.log("before splice:", todo_item_array)
             todo_item_array.splice(i, 1);
-            console.log("after splice:", todo_item_array);
+        }
+        else{
+            console.log("error in deleteTask function");
         }
     }
 }
@@ -197,13 +205,38 @@ function deleteTask(id) {
 function edit() {
     if (todo_item_array.length > 0) {
         console.log("edit clicked");
-        $(".delete_td").toggle('slide');
+        $(".operation_td").toggle('slide');
     }
 }
 
+function editTask(id){
+    $('#editModal').modal('show');
+    for(var i in todo_item_array){
+        if(todo_item_array[i].id == id){
+            var task = todo_item_array[i];
+            index_of_task_to_edit = i;
+        }
+        else{
+            console.log("cannot find task by id");
+        }
+    }
+    $("#edittaskInput").val(task.task);
+    $("#editdateInput").val(task.due_date);
+    $("#editpriorityInput").val(task.priority);
+    $("#editdetailsInput").val(task.details);
+}
 
+function submitChanges(task,i){
+    todo_item_array[index_of_task_to_edit].task = $("#edittaskInput").val();
+    todo_item_array[index_of_task_to_edit].due_date = $("#editdateInput").val();
+    todo_item_array[index_of_task_to_edit].priority = $("#editpriorityInput").val();
+    todo_item_array[index_of_task_to_edit].details = $("#editdetailsInput").val();
+    //need to fix this functionality but update_table works for now
+    update_table();
+}
 
 function update_table(){
+    $(".operation_td").hide("slide");
     console.log('update Table pre-ajax');
     $.ajax({ //this page sends data to the login_handler.php page
         url: "data_handler.php",
@@ -226,4 +259,11 @@ function update_table(){
         }
     });
 
+}
+
+function complete(id,value){
+    for(var i in todo_item_array){
+        if
+    }
+    //update_table();
 }
