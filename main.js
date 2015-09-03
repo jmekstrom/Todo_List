@@ -182,7 +182,23 @@ function showTask(id){
 
 function deleteTask(id) {
     console.log("delete clicked", id);
-    $('tr[data-index=' + id + ']').remove();
+    //$('tr[data-index=' + id + ']').remove(); -just for now while I do ajax.
+    $.ajax({
+        url:'data_handler_delete.php',
+        data:{
+            obj_id: id
+        },
+        cache: false,
+        method: "POST",
+        dataType: "json",
+        success: function (response) {
+            console.log("response", response);
+            if(response.success){
+                update_dom_table();
+            }
+        }
+    });
+
 
 }
 
