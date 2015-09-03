@@ -1,4 +1,5 @@
 var taskinput = $("#taskInput").val();
+var editState = false;
 
 /*****************
  *
@@ -26,7 +27,6 @@ $(document).ready(function () {
             complete(id,0);
         }
     });
-    editState = false;
 });
 
 /*********************
@@ -71,7 +71,6 @@ function login_ajaxCall() {
         success: function (response) {
             console.log('the response is ', response);
             if (response.success) {
-                console.log('IT WORKED')
                 load_content('list_all_items');
                 update_dom_table();
             }
@@ -115,11 +114,19 @@ function logout_ajaxCall() {
         method: "POST",
         dataType: "text",
         success: function (response) {
-            console.log(response);
             load_content("login");
         }
     })
 }
+
+/*********************
+ * Function Name: addTask();
+ * @purpose: creates the task_object which is then used in all the things.
+ *           It begins the "adding" action hence the name;
+ * @params: N/A;
+ * @globals: editState;
+ * @return: N/A;
+ */
 
 function addTask() {
     $(".operation_td").hide("slide");
@@ -142,11 +149,20 @@ function addTask() {
 
 }
 
+/*********************
+ * Function Name: create_task_dom();
+ * @purpose: This function is responsible for creating dom nodes from a todo_item_object;
+ * @params: todo_item_object;
+ * @globals: N/A;
+ * @return: N/A;
+ */
+
+
 function create_task_dom(todo_item_object){
-    //console.log("to do item object",todo_item_object);
     if(todo_item_object.complete == 1){
         var complete = true;
         var crossout = "crossout";
+
     }
     else{
         var complete = false;
