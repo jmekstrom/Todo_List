@@ -86,6 +86,7 @@ function logout_ajaxCall() {
 
 function addTask() {
     $(".operation_td").hide("slide");
+    editState = false;
     var task     = $("#taskInput").val();
     var due_date     = $("#dateInput").val();
     var priority = $("#priorityInput").val();
@@ -105,7 +106,7 @@ function addTask() {
 }
 
 function create_task_dom(todo_item_object){
-    console.log("to do item object",todo_item_object);
+    //console.log("to do item object",todo_item_object);
     var $tableRow = $('<tr>', {
         'data-index': todo_item_object.id
     });
@@ -154,7 +155,6 @@ function create_task_dom(todo_item_object){
     else{
         $(".operation_td").hide();
     }
-    //var taskDOM = $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td,$deleteTask_td);
 }
 
 function addClicked(){
@@ -189,7 +189,6 @@ function showTask(id){
 
 function deleteTask(id) {
     console.log("delete clicked", id);
-    //$('tr[data-index=' + id + ']').remove(); -just for now while I do ajax.
     $.ajax({
         url:'data_handler_delete.php',
         data:{
@@ -202,6 +201,9 @@ function deleteTask(id) {
             console.log("response", response);
             if(response.success){
                 update_dom_table();
+            }
+            else{
+                console.log("nothing in DB to delete")
             }
         }
     });
@@ -247,9 +249,9 @@ function submitChanges(task,i){
     update_dom_table();
 }
 
+var todo_items = {};
 function update_dom_table(){
-    //$(".operation_td").hide("slide");
-    console.log('update dom Table pre-ajax');
+    //console.log('update dom Table pre-ajax');
     $.ajax({ //this page sends data to the login_handler.php page
         url: "data_handler_receive.php",
         method: "POST",
@@ -257,18 +259,23 @@ function update_dom_table(){
         data: {},
         dataType: 'json',
         success: function (response) {
-            console.log("table from database",response);
-            console.log(response.length);
-            todo_items = {};
-            for(var i = 0; i< response.length; i++){
-                var id = response[i].id;
-                todo_items[id] = response[i];
+            if(response.success && response.data.length > 0) {
+                todo_items = {};
+                for (var i = 0; i < response.data.length; i++) {
+                    var id = response.data[i].id;
+                    todo_items[id] = response.data[i];
+                }
+                console.log("todo_items inside of update_dom_table: ", todo_items);
+                $('tbody').empty();
+                for (var j in todo_items) {
+                    console.log("in loop", todo_items[j]);
+                    create_task_dom(todo_items[j]);
+                }
             }
-            console.log("todo_items inside of update_dom_table: " , todo_items);
-            $('tbody').empty();
-            for(var j in todo_items){
-                console.log("in loop",todo_items[j].date);
-                create_task_dom(todo_items[j]);
+            else{
+                console.log("no more data in DB",response);
+                todo_items = {};
+                $('tbody').empty();
             }
         }
     });
