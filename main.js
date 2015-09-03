@@ -83,12 +83,8 @@ function logout_ajaxCall() {
     })
 }
 
-var todo_item_array=[];
-var id = 1;
-
 function addTask() {
     $(".operation_td").hide("slide");
-    id++;
     var task     = $("#taskInput").val();
     var due_date     = $("#dateInput").val();
     var priority = $("#priorityInput").val();
@@ -104,16 +100,13 @@ function addTask() {
         created_datetime: created_datetime,
     }
     add_item_db(todo_item);
-    //create_task_dom(todo_item);
-    todo_item_array.push(todo_item);
-    console.log("todo_item_array inside of addTask",todo_item_array);
 
 }
 
 function create_task_dom(todo_item_object){
     console.log("to do item object",todo_item_object);
     var $tableRow = $('<tr>', {
-        'data-index': id
+        'data-index': todo_item_object.id
     });
     var $checkbox_td = $('<td>', {
         class: "checkbox_td"
@@ -125,15 +118,15 @@ function create_task_dom(todo_item_object){
     })
     var $task_td = $("<td>", {
         class: "task_td",
-        onclick: "showTask(" + id + ")"
+        onclick: "showTask(" + todo_item_object.id + ")"
     }).text(todo_item_object.task);
     var $date_td = $("<td>", {
         class: "date_td",
-        onclick: "showTask(" + id + ")"
+        onclick: "showTask(" + todo_item_object.id + ")"
     }).text(todo_item_object.due_date);
     var $priority_td = $("<td>", {
         class: "priority_td",
-        onclick: "showTask(" + id + ")"
+        onclick: "showTask(" + todo_item_object.id + ")"
     }).text(todo_item_object.priority);
     var $operation_td = $("<td>", {
         class: "operation_td"
@@ -141,14 +134,14 @@ function create_task_dom(todo_item_object){
     var $editTask_btn = $("<button>", {
         type: "button",
         class: "nofocus btn btn-xs btn-warning editTaskBtn",
-        onclick: "editTask("+id+")"
+        onclick: "editTask("+todo_item_object.id+")"
     }).append($('<span>',{
         class: 'glyphicon glyphicon-edit'
     }));
     var $deleteTask_btn = $("<button>", {
         type: "button",
         class: "nofocus btn btn-xs btn-danger deleteTaskBtn",
-        onclick: "deleteTask(" + id + ")"
+        onclick: "deleteTask(" + todo_item_object.id + ")"
     }).text('X');
     $($operation_td).append($editTask_btn,$deleteTask_btn).hide();
     $($checkbox_td).append($checkbox);
@@ -168,10 +161,9 @@ function addClicked(){
 
 
 function showTask(id){
-    console.log(todo_item_array[0].id);
-    for(var i in todo_item_array){
-        if(todo_item_array[i].id == id){
-            var todoObj = todo_item_array[i];
+    for(var i in todo_items){
+        if(todo_items[i].id == id){
+            var todoObj = todo_items[i];
         }
     }
     if (todoObj === undefined) {
@@ -191,18 +183,11 @@ function showTask(id){
 function deleteTask(id) {
     console.log("delete clicked", id);
     $('tr[data-index=' + id + ']').remove();
-    for (var i in todo_item_array) {
-        if (todo_item_array[i].id === id) {
-            todo_item_array.splice(i, 1);
-        }
-        else{
-            console.log("error in deleteTask function");
-        }
-    }
+
 }
 
 function edit() {
-    if (todo_item_array.length > 0) {
+    if (!$.isEmptyObject(todo_items)) {
         console.log("edit clicked");
         $(".operation_td").toggle('slide');
     }
@@ -210,9 +195,9 @@ function edit() {
 
 function editTask(id){
     $('#editModal').modal('show');
-    for(var i in todo_item_array){
-        if(todo_item_array[i].id == id){
-            var task = todo_item_array[i];
+    for(var i in todo_items){
+        if(todo_items[i].id == id){
+            var task = todo_items[i];
             index_of_task_to_edit = i;
         }
         else{
@@ -226,11 +211,11 @@ function editTask(id){
 }
 
 function submitChanges(task,i){
-    todo_item_array[index_of_task_to_edit].task = $("#edittaskInput").val();
-    todo_item_array[index_of_task_to_edit].due_date = $("#editdateInput").val();
-    todo_item_array[index_of_task_to_edit].priority = $("#editpriorityInput").val();
-    todo_item_array[index_of_task_to_edit].details = $("#editdetailsInput").val();
-    //need to fix this functionality but update_table works for now
+    todo_items[index_of_task_to_edit].task = $("#edittaskInput").val();
+    todo_items[index_of_task_to_edit].due_date = $("#editdateInput").val();
+    todo_items[index_of_task_to_edit].priority = $("#editpriorityInput").val();
+    todo_items[index_of_task_to_edit].details = $("#editdetailsInput").val();
+    update_dom_table();
 }
 
 function update_dom_table(){
@@ -245,15 +230,16 @@ function update_dom_table(){
         success: function (response) {
             console.log("table from database",response);
             console.log(response.length);
-            todo_item_array = [];
+            todo_items = {};
             for(var i = 0; i< response.length; i++){
-                todo_item_array.push(response[i]);
+                var id = response[i].id;
+                todo_items[id] = response[i];
             }
-            console.log("todo_item_array inside of update_dom_table: " , todo_item_array);
+            console.log("todo_items inside of update_dom_table: " , todo_items);
             $('tbody').empty();
-            for(var j = 0; j < todo_item_array.length; j++){
-                console.log(todo_item_array[j].date);
-                create_task_dom(todo_item_array[j]);
+            for(var j in todo_items){
+                console.log("in loop",todo_items[j].date);
+                create_task_dom(todo_items[j]);
             }
         }
     });
@@ -261,7 +247,7 @@ function update_dom_table(){
 }
 
 function complete(id,value) {
-    for (var i in todo_item_array) {
+    for (var i in todo_items) {
         //update_table();
     }
 }
