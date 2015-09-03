@@ -152,6 +152,14 @@ function create_task_dom(todo_item_object){
         class: "nofocus btn btn-xs btn-danger deleteTaskBtn",
         onclick: "deleteTask(" + todo_item_object.id + ")"
     }).text('X');
+    if(complete){
+        $deleteTask_btn.hide();
+        $editTask_btn.hide();
+    }
+    else{
+        $deleteTask_btn.show();
+        $editTask_btn.show();
+    }
     $($operation_td).append($editTask_btn,$deleteTask_btn)
     $($checkbox_td).append($checkbox);
     $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td,$operation_td);
@@ -253,7 +261,25 @@ function submitChanges(task,i){
     todo_items[index_of_task_to_edit].due_date = $("#editdateInput").val();
     todo_items[index_of_task_to_edit].priority = $("#editpriorityInput").val();
     todo_items[index_of_task_to_edit].details = $("#editdetailsInput").val();
-    update_dom_table();
+    var task_object = todo_items[index_of_task_to_edit];
+    $.ajax({
+        url: 'data_handler_edit.php',
+        method: "POST",
+        cache: false,
+        data: {
+            task_data: task_object
+        },
+        dataType: 'json',
+        success: function (response) {
+            if (response.success) {
+                console.log("database was edited",response);
+                update_dom_table();
+            }
+            else {
+                console.log("database was not updated",response);
+            }
+        }
+    });
 }
 
 var todo_items = {};
