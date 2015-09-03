@@ -14,11 +14,9 @@ $(document).ready(function () {
     $('tbody').on('change', '.checkbox', function () {
         var id = $(this).parent().parent().attr("data-index");
         if ($(this).is(':checked')) {
-            $(this).parent().siblings().addClass("crossout");
             complete(id,1);
         }
         else {
-            $(this).parent().siblings().removeClass("crossout");
             complete(id,0);
         }
     });
@@ -107,6 +105,14 @@ function addTask() {
 
 function create_task_dom(todo_item_object){
     //console.log("to do item object",todo_item_object);
+    if(todo_item_object.complete == 1){
+        var complete = true;
+        var crossout = "crossout";
+    }
+    else{
+        var complete = false;
+        var crossout = "";
+    }
     var $tableRow = $('<tr>', {
         'data-index': todo_item_object.id
     });
@@ -117,17 +123,18 @@ function create_task_dom(todo_item_object){
         type: "checkbox",
         class: "checkbox glyphicon glyphicon-unchecked",
         value: todo_item_object.complete
-    })
+    }).prop('checked', complete);
+
     var $task_td = $("<td>", {
-        class: "task_td",
+        class: "task_td "+crossout,
         onclick: "showTask(" + todo_item_object.id + ")"
     }).text(todo_item_object.task);
     var $date_td = $("<td>", {
-        class: "date_td",
+        class: "date_td " + crossout,
         onclick: "showTask(" + todo_item_object.id + ")"
     }).text(todo_item_object.due_date);
     var $priority_td = $("<td>", {
-        class: "priority_td",
+        class: "priority_td " + crossout,
         onclick: "showTask(" + todo_item_object.id + ")"
     }).text(todo_item_object.priority);
     var $operation_td = $("<td>", {
@@ -283,18 +290,26 @@ function update_dom_table(){
 }
 
 function complete(id,value) {
-    console.log("complete function", todo_items[id],value)
+    todo_items[id].complete = value;
+    var task_object = todo_items[id]
+    //console.log("complete function", todo_items[id])
     $.ajax({
-        url: "data_handler_complete.php",
+        url: 'data_handler_complete.php',
         method: "POST",
         cache: false,
         data: {
-            task_data: todo_items[id]
+            task_data: task_object
         },
-        success: function(response){
-            console.log(response);
+        dataType: 'json',
+        success: function (response) {
+            if(response.success){
+                update_dom_table();
+            }
+            else{
+                console.log("database was not updated");
+            }
         }
-    })
+    });
 }
 
 function add_item_db(task_object){
