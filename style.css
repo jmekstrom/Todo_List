@@ -99,11 +99,11 @@ tr {
     font-style: bold;
 }
 
-.addBtn:focus, .deleteTaskBtn:focus{
+.nofocus:focus {
     outline:none;
 }
 
-.addBtn:active:focus, .deleteTaskBtn:active:focus {
+.nofocus:active:focus {
     outline: 0;
 }
 
