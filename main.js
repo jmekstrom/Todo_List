@@ -9,16 +9,19 @@ var index_of_task_to_edit;
  */
 
 $(document).ready(function () {
+    var content_container = $('.content_container');
     update_dom_table();
-    $('.content_container').on('click', '#update_list', function () {
-        update_dom_table();
-    });
     taskinput = $("#taskInput").val();
     checktaskInput();
-    $('#addModal').keyup(function () {
+    content_container.on('keyup', '#addModal', function(){
         taskinput = $("#taskInput").val();
         checktaskInput();
     });
+
+    //$('#addModal').keyup(function () {
+    //    taskinput = $("#taskInput").val();
+    //    checktaskInput();
+    //});
     $('tbody').on('change', '.checkbox', function () {
         var id = $(this).parent().parent().attr("data-index");
         if ($(this).is(':checked')) {
