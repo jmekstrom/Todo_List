@@ -479,7 +479,7 @@ function add_item_db(task_object){
         },
         dataType: 'json',
         success: function(response){
-            //console.log(response);
+            console.log(response);
             update_dom_table();
         }
     });
