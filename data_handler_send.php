@@ -8,7 +8,10 @@ if(!empty($_SESSION['user_id'])){
     $complete = $_POST["task_data"]["complete"];
     $created_datetime = $_POST["task_data"]["created_datetime"];
     $details = $_POST["task_data"]["details"];
-    $due_date = $_POST["task_data"]["due_date"];
+    $due_date = strtotime($_POST["task_data"]["due_date"]);
+    if (empty($due_date)) {
+        $due_date = 2147483647;
+    }
     $id = null;
     $priority = $_POST["task_data"]["priority"];
     $task= $_POST["task_data"]["task"];
