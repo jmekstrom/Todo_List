@@ -7,7 +7,6 @@ var index_of_task_to_edit;
  * document ready
  * Functions called here: update_dom_table, checktaskInput, complete
  */
-
 $(document).ready(function () {
     var content_container = $('.content_container');
     update_dom_table();
@@ -21,12 +20,14 @@ $(document).ready(function () {
     $('tbody').on('change', '.checkbox', function () {
         var id = $(this).parent().parent().attr("data-index");
         if ($(this).is(':checked')) {
+            $(this).parent().parent().siblings().slideToggle();
             complete(id,1);
         }
         else {
             complete(id,0);
         }
     });
+
 });
 
 /*********************
@@ -37,7 +38,6 @@ $(document).ready(function () {
  * @globals: taskinput;
  * @return: none;
  */
-
 function checktaskInput() {
     if (taskinput === undefined || taskinput == '') {
         $('#addtaskBtn').prop('disabled', true);
@@ -211,6 +211,7 @@ function create_task_dom(todo_item_object){
     if(complete){
         $deleteTask_btn.hide();
         $editTask_btn.hide();
+        $tableRow.css("background-color","lightgrey");
     }
     else{
         $deleteTask_btn.show();
@@ -264,8 +265,14 @@ function showTask(id){
         console.log("something is wrong with me...");
         return;
     }
+    if(todoObj.complete == 1){
+        var status = "Complete";
+    }
+    else{
+        var status = "Incomplete";
+    }
     $("#task").html("Task: " + todoObj.task);
-    $("#status_p").html("Status:" + todoObj.complete);
+    $("#status_p").html("Status: " + status);
     $("#date_p").html("Complete by: " + todoObj.due_date);
     $("#priority_p").html("Priority: " + todoObj.priority);
     $("#details_p").html("Extra Details: " + todoObj.details);
@@ -404,13 +411,17 @@ function update_dom_table(){
         data: {},
         dataType: 'json',
         success: function (response) {
-            if(response.success && response.data.length > 0) {
+            if(response.success && !$.isEmptyObject(response.data)) {
                 todo_items = {};
-                for (var i = 0; i < response.data.length; i++) {
-                    var id = response.data[i].id;
-                    todo_items[id] = response.data[i];
+                console.log(response.data);
+                for (var i in response.data) {
+                    var order = response.data[i];
+                    todo_items[i] = order;
                 }
-                //console.log("todo_items inside of update_dom_table: ", todo_items);
+
+                console.log("Data in order", todo_items);
+                console.log("todo_items inside of update_dom_table: ", todo_items);
+
                 $('tbody').empty();
                 for (var j in todo_items) {
                     console.log("in loop", todo_items[j]);
@@ -437,8 +448,14 @@ function update_dom_table(){
  */
 
 function complete(id,value) {
-    todo_items[id].complete = value;
-    var task_object = todo_items[id]
+    for(var i in todo_items){
+        console.log(i,todo_items[i]);
+        if(todo_items[i].id == id){
+            var task = i;
+        }
+    }
+    todo_items[task].complete = value;
+    var task_object = todo_items[task];
     //console.log("complete function", todo_items[id])
     $.ajax({
         url: 'data_handler_complete.php',
