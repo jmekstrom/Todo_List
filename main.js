@@ -404,7 +404,7 @@ function submitChanges(task,i){
 var todo_items = {};
 
 function update_dom_table(){
-    //console.log('update dom Table pre-ajax');
+    console.log('update dom Table pre-ajax');
     $.ajax({ //this page sends data to the login_handler.php page
         url: "data_handler_receive.php",
         method: "POST",
