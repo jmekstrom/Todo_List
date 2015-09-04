@@ -4,7 +4,7 @@
         <th class="checkbox_th"><span class="glyphicon glyphicon-check" aria-hidden="true"></span></th>
         <th>Task
             <button class="nofocus addBtn btn btn-xs btn-success" type="button" onclick="addClicked()">+</button>
-            <button class="nofocus editBtn btn btn-xs btn-warning" type="button" onclick="edit()" >Edit</button>
+            <button class="nofocus editBtn btn btn-xs btn-warning" type="button" onclick="edit()">Edit</button>
         </th>
         <th>Date</th>
         <th>Priority</th>
@@ -16,11 +16,11 @@
 
     </tbody>
     <tfoot>
-        <tr class="tableBottom">
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+    <tr class="tableBottom">
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
     </tfoot>
 </table>
 
@@ -41,10 +41,19 @@
 
                 <div class="input-group form-group date">
                     <input type="text" class="form-control" placeholder="Date & Time" id="dateInput">
-                    <div class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></div>
+
+                    <div class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                    </div>
                 </div>
 
+                <div class="input-append bootstrap-timepicker-component">
+                    <input type="text" class="timepicker-default input-small"/>
+                    <span class="add-on"></span>
+                </div>
+
+
                 <script type="text/javascript">
+                    $('.timepicker-default').timepicker();
                     $(function () {
                         $('#dateInput').datepicker({
                             orientation: "bottom"
@@ -67,7 +76,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id='addtaskBtn' class="btn btn-success" data-dismiss="modal" onclick="addTask()">Add</button>
+                <button type="button" id='addtaskBtn' class="btn btn-success" data-dismiss="modal" onclick="addTask()">
+                    Add
+                </button>
             </div>
         </div>
 
@@ -86,11 +97,17 @@
             </div>
             <div class="modal-body">
                 <h3 id="task"></h3>
+
                 <p id="status_p"></p>
+
                 <p id="date_p"></p>
+
                 <p id="priority_p"></p>
+
                 <p id="created_p"></p>
+
                 <p id="id_p"></p>
+
                 <p id="details_p"></p>
             </div>
             <div class="modal-footer">
@@ -138,11 +155,13 @@
                 </div>
 
                 <div class="form-group">
-                    <textarea class="form-control" rows="5" id="editdetailsInput" placeholder="Extra details..."></textarea>
+                    <textarea class="form-control" rows="5" id="editdetailsInput"
+                              placeholder="Extra details..."></textarea>
                 </div>
             </div>
             <div class="modal-footer" id="edit-modal-footer">
-                <button type="button" id='submitChangesBtn' class="btn btn-success" data-dismiss="modal" onclick="submitChanges()">
+                <button type="button" id='submitChangesBtn' class="btn btn-success" data-dismiss="modal"
+                        onclick="submitChanges()">
                     Submit
                 </button>
             </div>

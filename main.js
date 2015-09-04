@@ -60,7 +60,7 @@ function login_ajaxCall() {
     var username = $('#username').val();
     var password = $('#password').val();
     $.ajax({
-        url: "login_handler.php",
+        url: "data_handlers/login_handler.php",
         method: "POST",
         cache: "false",
         data: {
@@ -109,7 +109,7 @@ function load_content(url) {
 
 function logout_ajaxCall() {
     $.ajax({
-        url: "logout.php",
+        url: "data_handlers/logout.php",
         cache: false,
         method: "POST",
         dataType: "text",
@@ -292,7 +292,7 @@ function showTask(id){
 
 function deleteTask(id) {
     $.ajax({
-        url:'data_handler_delete.php',
+        url:'data_handlers/data_handler_delete.php',
         data:{
             obj_id: id
         },
@@ -374,7 +374,7 @@ function submitChanges(task,i){
     todo_items[index_of_task_to_edit].details = $("#editdetailsInput").val();
     var task_object = todo_items[index_of_task_to_edit];
     $.ajax({
-        url: 'data_handler_edit.php',
+        url: 'data_handlers/data_handler_edit.php',
         method: "POST",
         cache: false,
         data: {
@@ -406,7 +406,7 @@ var todo_items = {};
 function update_dom_table(){
     //console.log('update dom Table pre-ajax');
     $.ajax({ //this page sends data to the login_handler.php page
-        url: "data_handler_receive.php",
+        url: "data_handlers/data_handler_receive.php",
         method: "POST",
         cache: "false",
         data: {},
@@ -459,7 +459,7 @@ function complete(id,value) {
     var task_object = todo_items[task];
     //console.log("complete function", todo_items[id])
     $.ajax({
-        url: 'data_handler_complete.php',
+        url: 'data_handlers/data_handler_complete.php',
         method: "POST",
         cache: false,
         data: {
@@ -489,7 +489,7 @@ function add_item_db(task_object){
     console.log('add_item_db pre-ajax');
     console.log("task_object", task_object);
     $.ajax({
-       url: 'data_handler_send.php',
+       url: 'data_handlers/data_handler_send.php',
         method: "POST",
         cache: false,
         data: {

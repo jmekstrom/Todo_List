@@ -4,13 +4,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="bootstrap-timepicker.js"></script>
+<script type="text/javascript" src="timepicker/js/bootstrap-timepicker.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="bootstrap-social.css">
-<link rel="stylesheet" href="bootstrap-datepicker.css">
+<link rel="stylesheet" href="addons/bootstrap-social.css">
+
 
 
 <script src="main.js"></script>
