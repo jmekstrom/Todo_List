@@ -469,6 +469,7 @@ function complete(id,value) {
  */
 function add_item_db(task_object){
     console.log('add_item_db pre-ajax');
+    console.log("task_object", task_object);
     $.ajax({
        url: 'data_handler_send.php',
         method: "POST",
