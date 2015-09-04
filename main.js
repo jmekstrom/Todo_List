@@ -17,7 +17,7 @@ $(document).ready(function () {
         checktaskInput();
     });
 
-    $('tbody').on('change', '.checkbox', function () {
+    content_container.on('change', '.checkbox', function () {
         var id = $(this).parent().parent().attr("data-index");
         if ($(this).is(':checked')) {
             $(this).parent().parent().siblings().slideToggle();
@@ -135,7 +135,8 @@ function addTask() {
     var due_date     = $("#dateInput").val();
     var priority = $("#priorityInput").val();
     var details = $("#detailsInput").val();
-    var created_datetime = new Date().getTime();
+    var created_datetime = Date.now()/1000;
+    console.log(created_datetime);
     var complete = 0;
     var todo_item = {
         complete: complete,

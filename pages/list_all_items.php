@@ -43,11 +43,11 @@
                     <input type="text" class="form-control" placeholder="Date & Time" id="dateInput">
                     <div class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></div>
                 </div>
+
                 <script type="text/javascript">
                     $(function () {
-                        $('#dateInput').datetimepicker({
-                            orientation: "left bottom",
-                            format: 'm/d/yy H:iip'
+                        $('#dateInput').datepicker({
+                            orientation: "bottom"
                         });
 
                     });
@@ -123,10 +123,7 @@
                 </div>
                 <script type="text/javascript">
                     $(function () {
-                        $('#dateInput').datetimepicker({
-                            orientation: "left bottom",
-                            format: 'm/d/yy H:iip'
-                        });
+                        $('#dateInput').datepicker();
 
                     });
                 </script>
