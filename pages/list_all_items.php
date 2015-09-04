@@ -12,7 +12,7 @@
     </tr>
     </thead>
 
-    <tbody>
+    <tbody id="todo_tbody">
 
     </tbody>
     <tfoot>
@@ -40,25 +40,16 @@
                 </div>
 
                 <div class="input-group form-group date">
-                    <input type="text" class="form-control" placeholder="Date & Time" id="dateInput">
+                    <input type="text" class="form-control" placeholder="Date & Time" id="datetimepicker1">
 
                     <div class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                     </div>
                 </div>
-
-                <div class="input-append bootstrap-timepicker-component">
-                    <input type="text" class="timepicker-default input-small"/>
-                    <span class="add-on"></span>
-                </div>
-
-
                 <script type="text/javascript">
-                    $('.timepicker-default').timepicker();
                     $(function () {
-                        $('#dateInput').datepicker({
-                            orientation: "bottom"
+                        $('#datetimepicker1').datepicker({
+                            orientation: 'bottom'
                         });
-
                     });
                 </script>
 
@@ -138,10 +129,12 @@
                     <div class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                     </div>
                 </div>
+
                 <script type="text/javascript">
                     $(function () {
-                        $('#dateInput').datepicker();
-
+                        $('#editdateInput').datepicker({
+                            orientation: 'bottom'
+                        });
                     });
                 </script>
 

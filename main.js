@@ -221,7 +221,7 @@ function create_task_dom(todo_item_object){
     $($operation_td).append($editTask_btn,$deleteTask_btn)
     $($checkbox_td).append($checkbox);
     $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td,$operation_td);
-    $('tbody').append($tableRow);
+    $('#todo_tbody').append($tableRow);
     if(editState) {
         $(".operation_td").show();
     }
@@ -423,7 +423,7 @@ function update_dom_table(){
                 console.log("Data in order", todo_items);
                 console.log("todo_items inside of update_dom_table: ", todo_items);
 
-                $('tbody').empty();
+                $('#todo_tbody').empty();
                 for (var j in todo_items) {
                     console.log("in loop", todo_items[j]);
                     create_task_dom(todo_items[j]);
@@ -432,7 +432,7 @@ function update_dom_table(){
             else{
                 console.log("no more data in DB",response);
                 todo_items = {};
-                $('tbody').empty();
+                $('#todo_tbody').empty();
             }
         }
     });
