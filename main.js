@@ -18,10 +18,6 @@ $(document).ready(function () {
         checktaskInput();
     });
 
-    //$('#addModal').keyup(function () {
-    //    taskinput = $("#taskInput").val();
-    //    checktaskInput();
-    //});
     $('tbody').on('change', '.checkbox', function () {
         var id = $(this).parent().parent().attr("data-index");
         if ($(this).is(':checked')) {
