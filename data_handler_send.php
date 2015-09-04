@@ -2,11 +2,9 @@
 session_start();
 
 if(!empty($_SESSION['user_id'])){
-
     foreach($_POST['task_data'] as $key => $value){
         $_POST['task_data'][$key]=addslashes($value);
     }
-
     $complete = $_POST["task_data"]["complete"];
     $created_datetime = $_POST["task_data"]["created_datetime"];
     $details = $_POST["task_data"]["details"];
