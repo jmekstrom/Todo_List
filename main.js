@@ -1,4 +1,12 @@
 var taskinput = $("#taskInput").val();
+var editState = false;
+var index_of_task_to_edit;
+
+/*****************
+ *
+ * document ready
+ * Functions called here: update_dom_table, checktaskInput, complete
+ */
 
 $(document).ready(function () {
     update_dom_table();
@@ -20,8 +28,16 @@ $(document).ready(function () {
             complete(id,0);
         }
     });
-    editState = false;
-})
+});
+
+/*********************
+ * Function Name: checktaskInput;
+ * @purpose: check to see if anything has been entered into the input boxes,
+ *           if so allow user to add information to dom/db;
+ * @params: N/A;
+ * @globals: taskinput;
+ * @return: none;
+ */
 
 function checktaskInput() {
     if (taskinput === undefined || taskinput == '') {
@@ -32,11 +48,19 @@ function checktaskInput() {
     }
 }
 
+/*********************
+ * Function Name: login_ajaxCall;
+ * @purpose: Send data to login_handler.php file which then checks a database for the user;
+ * @params: N/A;
+ * @globals: N/A;
+ * @return: N/A;
+ */
+
 function login_ajaxCall() {
     console.log("login before ajax");
     var username = $('#username').val();
     var password = $('#password').val();
-    $.ajax({ //this page sends data to the login_handler.php page
+    $.ajax({
         url: "login_handler.php",
         method: "POST",
         cache: "false",
@@ -48,13 +72,20 @@ function login_ajaxCall() {
         success: function (response) {
             console.log('the response is ', response);
             if (response.success) {
-                console.log('IT WORKED')
                 load_content('list_all_items');
                 update_dom_table();
             }
         }
     });
 }
+
+/*********************
+ * Function Name: load_content;
+ * @purpose: Loads the specific page that is required for a given situation. See login_ajaxCall for eg;
+ * @params: url;
+ * @globals: N/A;
+ * @return: N/A;
+ */
 
 function load_content(url) {
     console.log("loading: " + url + ".php");
@@ -69,6 +100,14 @@ function load_content(url) {
     })
 }
 
+/*********************
+ * Function Name: logout_ajaxCall;
+ * @purpose: ajax call for logout.php which destroys the session and logs the user out;
+ * @params: N/A;
+ * @globals: N/A;
+ * @return: N/A;
+ */
+
 function logout_ajaxCall() {
     $.ajax({
         url: "logout.php",
@@ -76,11 +115,19 @@ function logout_ajaxCall() {
         method: "POST",
         dataType: "text",
         success: function (response) {
-            console.log(response);
             load_content("login");
         }
     })
 }
+
+/*********************
+ * Function Name: addTask();
+ * @purpose: creates the task_object which is then used in all the things.
+ *           It begins the "adding" action hence the name;
+ * @params: N/A;
+ * @globals: editState;
+ * @return: N/A;
+ */
 
 function addTask() {
     $(".operation_td").hide("slide");
@@ -103,11 +150,21 @@ function addTask() {
 
 }
 
+/*********************
+ * Function Name: create_task_dom();
+ * @purpose: This function is responsible for creating dom nodes from a todo_item_object;
+ * @params: todo_item_object;
+ * @globals: N/A;
+ * @return: N/A;
+ */
+
+
 function create_task_dom(todo_item_object){
-    //console.log("to do item object",todo_item_object);
+
     if(todo_item_object.complete == 1){
         var complete = true;
         var crossout = "crossout";
+
     }
     else{
         var complete = false;
@@ -172,6 +229,15 @@ function create_task_dom(todo_item_object){
     }
 }
 
+/*********************
+ * Function Name: addClicked();
+ * @purpose: This function is for clearing out the input fields so new information can be entered and showing the modal;
+ * @params: N/A;
+ * @globals: taskinput;
+ * @return: N/A;
+ */
+
+
 function addClicked(){
     taskinput = '';
     checktaskInput();
@@ -181,6 +247,13 @@ function addClicked(){
     $('#addModal').modal('show');
 }
 
+/*********************
+ * Function Name: showTask();
+ * @purpose: responsible for showing task details, its triggered when you click on any of the td's within the table;
+ * @params: id;
+ * @globals: N/A;
+ * @return: activated only if the todoObj is undefined;
+ */
 
 function showTask(id){
     for(var i in todo_items){
@@ -202,8 +275,15 @@ function showTask(id){
     $('#itemModal').modal('show');
 }
 
+/*********************
+ * Function Name: deleteTask();
+ * @purpose: responsible for deleting data out of the database, it does this through an ajax call to the data_handler_delete;
+ * @params: id;
+ * @globals: N/A;
+ * @return: N/A;
+ */
+
 function deleteTask(id) {
-    console.log("delete clicked", id);
     $.ajax({
         url:'data_handler_delete.php',
         data:{
@@ -213,7 +293,6 @@ function deleteTask(id) {
         method: "POST",
         dataType: "json",
         success: function (response) {
-            console.log("response", response);
             if(response.success){
                 update_dom_table();
             }
@@ -225,6 +304,14 @@ function deleteTask(id) {
 
 
 }
+
+/*********************
+ * Function Name: edit();
+ * @purpose: checks to see if the operations part of the table should be visible or not, if so, displays the edit opperations;
+ * @params: N/A;
+ * @globals: N/A;
+ * @return: N/A;
+ */
 
 function edit() {
     if (!$.isEmptyObject(todo_items)) {
@@ -238,6 +325,14 @@ function edit() {
         }
     }
 }
+
+/*********************
+ * Function Name: editTask();
+ * @purpose: cycles through todo_items and gives us the ability to edit the task;
+ * @params: id;
+ * @globals: index_of_task_to_edit;
+ * @return: N/A;
+ */
 
 function editTask(id){
     $('#editModal').modal('show');
@@ -256,6 +351,15 @@ function editTask(id){
     $("#editdetailsInput").val(task.details);
 }
 
+
+/*********************
+ * Function Name: submitChanges();
+ * @purpose: cycles through todo_items and gives us the ability to edit the task;
+ * @param: task;
+ * @param: i;
+ * @globals: N/A;
+ * @return: N/A;
+ */
 function submitChanges(task,i){
     todo_items[index_of_task_to_edit].task = $("#edittaskInput").val();
     todo_items[index_of_task_to_edit].due_date = $("#editdateInput").val();
@@ -282,7 +386,16 @@ function submitChanges(task,i){
     });
 }
 
+/*********************
+ * Function Name: update_dom_table();
+ * @purpose: update the dom with new information from the database. this interacts with most major functionality in the table;
+ * @params: N/A;
+ * @globals: todo_items;
+ * @return: N/A;
+ */
+
 var todo_items = {};
+
 function update_dom_table(){
     //console.log('update dom Table pre-ajax');
     $.ajax({ //this page sends data to the login_handler.php page
@@ -298,7 +411,7 @@ function update_dom_table(){
                     var id = response.data[i].id;
                     todo_items[id] = response.data[i];
                 }
-                console.log("todo_items inside of update_dom_table: ", todo_items);
+                //console.log("todo_items inside of update_dom_table: ", todo_items);
                 $('tbody').empty();
                 for (var j in todo_items) {
                     console.log("in loop", todo_items[j]);
@@ -314,6 +427,15 @@ function update_dom_table(){
     });
 
 }
+
+/*********************
+ * Function Name: complete();
+ * @purpose: checks to see if a task is complete, and then ajax calls data_handler_complete;
+ * @param: id;
+ * @param: value;
+ * @globals: todo_items;
+ * @return: N/A;
+ */
 
 function complete(id,value) {
     todo_items[id].complete = value;
@@ -338,6 +460,14 @@ function complete(id,value) {
     });
 }
 
+
+/*********************
+ * Function Name: add_item_db();
+ * @purpose: adds task to the database;
+ * @param: task_object;
+ * @globals: N/A;
+ * @return: N/A;
+ */
 function add_item_db(task_object){
     console.log('add_item_db pre-ajax');
     $.ajax({
