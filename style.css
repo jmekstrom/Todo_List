@@ -194,6 +194,7 @@ input[type=checkbox].glyphicon {
 
 .crossout{
     text-decoration: line-through;
+    color: #ababab;
 }
 
 .editBtn{

@@ -2,7 +2,7 @@
 session_start();
 $user_id = $_SESSION['user_id'];
 require('mysql_connect.php');
-$query = "SELECT * FROM tdl_item_list WHERE user_id='$user_id' ORDER BY complete ASC";
+$query = "SELECT * FROM tdl_item_list WHERE user_id='$user_id' ORDER BY complete ASC, due_date, priority,task";
 $results = mysqli_query($conn, $query);
 $i = 0;
 if(mysqli_num_rows($results) > 0){

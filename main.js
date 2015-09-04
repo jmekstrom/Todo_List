@@ -15,6 +15,7 @@ $(document).ready(function () {
     $('tbody').on('change', '.checkbox', function () {
         var id = $(this).parent().parent().attr("data-index");
         if ($(this).is(':checked')) {
+            $(this).parent().parent().siblings().slideToggle();
             complete(id,1);
         }
         else {
@@ -155,6 +156,7 @@ function create_task_dom(todo_item_object){
     if(complete){
         $deleteTask_btn.hide();
         $editTask_btn.hide();
+        $tableRow.css("background-color","lightgrey");
     }
     else{
         $deleteTask_btn.show();
