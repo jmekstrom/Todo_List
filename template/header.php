@@ -12,6 +12,9 @@
 <link rel="stylesheet" href="addons/bootstrap-social.css">
 <link rel="stylesheet" href="addons/bootstrap-datepicker.css">
 
+<link href="addons/timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet">
+<script src="addons/timepicker/js/bootstrap-timepicker.js"></script>
+
 <script src="main.js"></script>
 <div>
     <div class="row header_div">

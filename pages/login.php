@@ -15,11 +15,11 @@
         </div>
         <div class="form-group">
             <label for="text">Email address:</label>
-            <input type="text" class="form-control" id="username" value="amattingley">
+            <input type="text" class="form-control" id="username">
         </div>
         <div class="form-group">
             <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="password" value="getpitted">
+            <input type="password" class="form-control" id="password">
         </div>
         <button type="button" class="btn btn-success" id="loginBtn" onclick="login_ajaxCall()">Login</button>
     </form>

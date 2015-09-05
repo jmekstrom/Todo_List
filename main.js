@@ -132,7 +132,8 @@ function addTask() {
     $(".operation_td").hide("slide");
     editState = false;
     var task     = $("#taskInput").val();
-    var due_date     = $("#dateInput").val();
+    var due_date     = $("#datepickerAdd").val()+" "+ $("#timepickerAdd").val();
+    console.log(due_date);
     var priority = $("#priorityInput").val();
     var details = $("#detailsInput").val();
     var created_datetime = Date.now()/1000;
@@ -352,8 +353,12 @@ function editTask(id){
             console.log("cannot find task by id");
         }
     }
+    var splitdatetime = task.due_date.split(" ");
+    var date = splitdatetime[0];
+    var time = splitdatetime[1];
     $("#edittaskInput").val(task.task);
-    $("#editdateInput").val(task.due_date);
+    $("#datepickerEdit").val(date);
+    $("#timepickerEdit").val(time);
     $("#editpriorityInput").val(task.priority);
     $("#editdetailsInput").val(task.details);
 }
@@ -369,7 +374,7 @@ function editTask(id){
  */
 function submitChanges(task,i){
     todo_items[index_of_task_to_edit].task = $("#edittaskInput").val();
-    todo_items[index_of_task_to_edit].due_date = $("#editdateInput").val();
+    todo_items[index_of_task_to_edit].due_date = $("#datepickerEdit").val()+" "+ $("#timepickerEdit").val();
     todo_items[index_of_task_to_edit].priority = $("#editpriorityInput").val();
     todo_items[index_of_task_to_edit].details = $("#editdetailsInput").val();
     var task_object = todo_items[index_of_task_to_edit];
