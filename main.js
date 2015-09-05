@@ -517,11 +517,12 @@ function create_user(){
         cache: false,
         data: {
             username: $('#username_create').val(),
-            password: $('#password_create').val()
+            password: $('#password_create').val(),
+            email: $('#email_create').val()
         },
-        dataType: 'text',
+        dataType: 'json',
         success: function(response){
             console.log(response);
         }
-    });
+    })
 }

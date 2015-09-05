@@ -55,6 +55,9 @@
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="password" id="password_create">
                 </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="email" id="email_create">
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" data-dismiss="modal" id="create_user" onclick="create_user()">
