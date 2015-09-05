@@ -512,13 +512,13 @@ function add_item_db(task_object){
 function create_user(){
     console.log("create user pre-ajax");
     $.ajax({
-        url: data_handler_user.php,
+        url: 'data_handler_user.php',
         method: "POST",
         cache: false,
         data: {
             username: $('#username_create').val(),
             password: $('#password_create').val()
-        }
+        },
         dataType: 'text',
         success: function(response){
             console.log(response);
