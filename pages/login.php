@@ -49,15 +49,15 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Username" id="username">
+                    <input type="text" class="form-control" placeholder="Username" id="username_create">
                 </div>
 
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="password" id="password">
+                    <input type="password" class="form-control" placeholder="password" id="password_create">
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">
+                <button type="button" class="btn btn-success" data-dismiss="modal" id="create_user">
                     Submit
                 </button>
             </div>
