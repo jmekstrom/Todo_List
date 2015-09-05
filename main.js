@@ -17,6 +17,10 @@ $(document).ready(function () {
         checktaskInput();
     });
 
+    content_container.on('click', '#loginBtn', function(){
+        login_ajaxCall($('#username').val() ,$('#password').val());
+    });
+
     content_container.on('change', '.checkbox', function () {
         var id = $(this).parent().parent().attr("data-index");
         if ($(this).is(':checked')) {
@@ -55,10 +59,8 @@ function checktaskInput() {
  * @return: N/A;
  */
 
-function login_ajaxCall() {
+function login_ajaxCall(username, password) {
     console.log("login before ajax");
-    var username = $('#username').val();
-    var password = $('#password').val();
     $.ajax({
         url: "login_handler.php",
         method: "POST",

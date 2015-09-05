@@ -31,7 +31,7 @@
             <label for="pwd">Password:</label>
             <input type="password" class="form-control" id="password" value="getpitted">
         </div>
-        <button type="button" class="btn btn-success" id="loginBtn" onclick="login_ajaxCall()">Login</button>
+        <button type="button" class="btn btn-success" id="loginBtn">Login</button>
     </form>
 </div>
 
