@@ -1,3 +1,5 @@
+
+
 <table class="table table-hover">
     <thead>
     <tr>
@@ -40,17 +42,20 @@
                 </div>
 
                 <div class="input-group form-group date">
-                    <input type="text" class="form-control" placeholder="Date & Time" id="datetimepicker1">
-
-                    <div class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                    <input type="text" class="form-control" placeholder="Date" id="datepickerAdd">
+                    <div class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></div>
+                    <div class="input-group bootstrap-timepicker pull-right">
+                        <input id="timepickerAdd" type="text" class="form-control" placeholder="Time">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
                     </div>
                 </div>
                 <script type="text/javascript">
                     $(function () {
-                        $('#datetimepicker1').datepicker({
+                        $('#datepickerAdd').datepicker({
                             orientation: 'bottom'
                         });
                     });
+                    $('#timepickerAdd').timepicker();
                 </script>
 
                 <div class="form-group">
@@ -124,18 +129,21 @@
                 </div>
 
                 <div class="input-group form-group date">
-                    <input type="text" class="form-control" placeholder="Date & Time" id="editdateInput">
-
+                    <input type="text" class="form-control" placeholder="Date" id="datepickerEdit">
                     <div class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                     </div>
+                    <div class="input-group bootstrap-timepicker pull-right">
+                        <input id="timepickerEdit" type="text" class="form-control" placeholder="Time">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                    </div>
                 </div>
-
                 <script type="text/javascript">
                     $(function () {
-                        $('#editdateInput').datepicker({
+                        $('#datepickerEdit').datepicker({
                             orientation: 'bottom'
                         });
                     });
+                    $('#timepickerEdit').timepicker();
                 </script>
 
                 <div class="form-group">

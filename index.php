@@ -18,7 +18,6 @@ include_once('template/header.php');
         include_once("pages/".$_GET['current_page'].".php");
         ?>
     </div>
-    <div class="footer col-xs-12">
-    </div>
+
 </div>
 
