@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal" id="create_user" onclick="create_user()">
+                <button type="button" class="btn btn-success" data-dismiss="modal" data-target="#createmodal" id="create_user" onclick="create_user()">
                     Submit
                 </button>
             </div>
