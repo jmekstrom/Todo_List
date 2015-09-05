@@ -531,7 +531,7 @@ function create_user(){
             if(response.success){
                 login_ajaxCall(username, password);
                 $('#createmodal').modal('hide');
-                $( '.modal-backdrop' ).remove();
+                $( '.modal-backdrop' ).remove(); //Somewhat hacky but this works for removing that weird modal filter.
             }
         }
     })
