@@ -513,18 +513,25 @@ function add_item_db(task_object){
 
 function create_user(){
     console.log("create user pre-ajax");
+    var username = $('#username_create').val();
+    var password = $('#password_create').val();
+    var email = $('#email_create').val();
     $.ajax({
         url: 'data_handler_user.php',
         method: "POST",
         cache: false,
         data: {
-            username: $('#username_create').val(),
-            password: $('#password_create').val(),
-            email: $('#email_create').val()
+            username: username,
+            password: password,
+            email: email
         },
         dataType: 'json',
         success: function(response){
             console.log(response);
+            if(response.success){
+                login_ajaxCall(username, password);
+                $('#createmodal').modal('hide');
+            }
         }
     })
 }
