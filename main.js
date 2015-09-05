@@ -531,6 +531,7 @@ function create_user(){
             if(response.success){
                 login_ajaxCall(username, password);
                 $('#createmodal').modal('hide');
+                $( '.modal-backdrop' ).remove();
             }
         }
     })
