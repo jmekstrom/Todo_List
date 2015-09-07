@@ -17,6 +17,10 @@ $(document).ready(function () {
         checktaskInput();
     });
 
+    content_container.on('click', '#loginBtn', function(){
+        login_ajaxCall($('#username').val() ,$('#password').val());
+    });
+
     content_container.on('change', '.checkbox', function () {
         var id = $(this).parent().parent().attr("data-index");
         if ($(this).is(':checked')) {
@@ -55,10 +59,8 @@ function checktaskInput() {
  * @return: N/A;
  */
 
-function login_ajaxCall() {
+function login_ajaxCall(username, password) {
     console.log("login before ajax");
-    var username = $('#username').val();
-    var password = $('#password').val();
     $.ajax({
         url: "login_handler.php",
         method: "POST",
@@ -501,4 +503,36 @@ function add_item_db(task_object){
             update_dom_table();
         }
     });
+}
+
+
+/*******************
+ * Function Name: create_user();
+ *
+*/
+
+function create_user(){
+    console.log("create user pre-ajax");
+    var username = $('#username_create').val();
+    var password = $('#password_create').val();
+    var email = $('#email_create').val();
+    $.ajax({
+        url: 'data_handler_user.php',
+        method: "POST",
+        cache: false,
+        data: {
+            username: username,
+            password: password,
+            email: email
+        },
+        dataType: 'json',
+        success: function(response){
+            console.log(response);
+            if(response.success){
+                login_ajaxCall(username, password);
+                $('#createmodal').modal('hide');
+                $( '.modal-backdrop' ).remove(); //Somewhat hacky but this works for removing that weird modal filter.
+            }
+        }
+    })
 }
