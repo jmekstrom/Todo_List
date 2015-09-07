@@ -14,7 +14,7 @@
         <th class="checkbox_th"><span class="glyphicon glyphicon-check" aria-hidden="true"></span></th>
         <th>Task
             <button class="nofocus addBtn btn btn-xs btn-success" type="button" onclick="addClicked()">+</button>
-            <button class="nofocus editBtn btn btn-xs btn-warning" type="button" onclick="edit()" >Edit</button>
+            <button class="nofocus editBtn btn btn-xs btn-warning" type="button" onclick="edit()">Edit</button>
         </th>
         <th>Date</th>
         <th>Priority</th>
@@ -22,15 +22,15 @@
     </tr>
     </thead>
 
-    <tbody>
+    <tbody id="todo_tbody">
 
     </tbody>
     <tfoot>
-        <tr class="tableBottom">
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+    <tr class="tableBottom">
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
     </tfoot>
 </table>
 
@@ -50,17 +50,20 @@
                 </div>
 
                 <div class="input-group form-group date">
-                    <input type="text" class="form-control" placeholder="Date & Time" id="dateInput">
+                    <input type="text" class="form-control" placeholder="Date" id="datepickerAdd">
                     <div class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></div>
+                    <div class="input-group bootstrap-timepicker pull-right">
+                        <input id="timepickerAdd" type="text" class="form-control" placeholder="Time">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                    </div>
                 </div>
-
                 <script type="text/javascript">
                     $(function () {
-                        $('#dateInput').datepicker({
-                            orientation: "bottom"
+                        $('#datepickerAdd').datepicker({
+                            orientation: 'bottom'
                         });
-
                     });
+                    $('#timepickerAdd').timepicker();
                 </script>
 
                 <div class="form-group">
@@ -77,7 +80,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id='addtaskBtn' class="btn btn-success" data-dismiss="modal" onclick="addTask()">Add</button>
+                <button type="button" id='addtaskBtn' class="btn btn-success" data-dismiss="modal" onclick="addTask()">
+                    Add
+                </button>
             </div>
         </div>
 
@@ -96,11 +101,17 @@
             </div>
             <div class="modal-body">
                 <h3 id="task"></h3>
+
                 <p id="status_p"></p>
+
                 <p id="date_p"></p>
+
                 <p id="priority_p"></p>
+
                 <p id="created_p"></p>
+
                 <p id="id_p"></p>
+
                 <p id="details_p"></p>
             </div>
             <div class="modal-footer">
@@ -126,16 +137,21 @@
                 </div>
 
                 <div class="input-group form-group date">
-                    <input type="text" class="form-control" placeholder="Date & Time" id="editdateInput">
-
+                    <input type="text" class="form-control" placeholder="Date" id="datepickerEdit">
                     <div class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                    </div>
+                    <div class="input-group bootstrap-timepicker pull-right">
+                        <input id="timepickerEdit" type="text" class="form-control" placeholder="Time">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
                     </div>
                 </div>
                 <script type="text/javascript">
                     $(function () {
-                        $('#dateInput').datepicker();
-
+                        $('#datepickerEdit').datepicker({
+                            orientation: 'bottom'
+                        });
                     });
+                    $('#timepickerEdit').timepicker();
                 </script>
 
                 <div class="form-group">
@@ -148,11 +164,13 @@
                 </div>
 
                 <div class="form-group">
-                    <textarea class="form-control" rows="5" id="editdetailsInput" placeholder="Extra details..."></textarea>
+                    <textarea class="form-control" rows="5" id="editdetailsInput"
+                              placeholder="Extra details..."></textarea>
                 </div>
             </div>
             <div class="modal-footer" id="edit-modal-footer">
-                <button type="button" id='submitChangesBtn' class="btn btn-success" data-dismiss="modal" onclick="submitChanges()">
+                <button type="button" id='submitChangesBtn' class="btn btn-success" data-dismiss="modal"
+                        onclick="submitChanges()">
                     Submit
                 </button>
             </div>

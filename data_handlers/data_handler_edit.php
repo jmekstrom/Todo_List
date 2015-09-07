@@ -1,5 +1,6 @@
 <?php
 session_start();
+date_default_timezone_set('America/Los_Angeles');
 require('mysql_connect.php');
 $user_id = $_SESSION['user_id'];
 $id = $_POST["task_data"]["id"];

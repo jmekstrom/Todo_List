@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+date_default_timezone_set('America/Los_Angeles');
 if(!empty($_SESSION['user_id'])){
     foreach($_POST['task_data'] as $key => $value){
         $_POST['task_data'][$key]=addslashes($value);

@@ -62,7 +62,7 @@ function checktaskInput() {
 function login_ajaxCall(username, password) {
     console.log("login before ajax");
     $.ajax({
-        url: "login_handler.php",
+        url: "data_handlers/login_handler.php",
         method: "POST",
         cache: "false",
         data: {
@@ -111,7 +111,7 @@ function load_content(url) {
 
 function logout_ajaxCall() {
     $.ajax({
-        url: "logout.php",
+        url: "data_handlers/logout.php",
         cache: false,
         method: "POST",
         dataType: "text",
@@ -134,7 +134,8 @@ function addTask() {
     $(".operation_td").hide("slide");
     editState = false;
     var task     = $("#taskInput").val();
-    var due_date     = $("#dateInput").val();
+    var due_date     = $("#datepickerAdd").val()+" "+ $("#timepickerAdd").val();
+    console.log(due_date);
     var priority = $("#priorityInput").val();
     var details = $("#detailsInput").val();
     var created_datetime = Date.now()/1000;
@@ -223,7 +224,7 @@ function create_task_dom(todo_item_object){
     $($operation_td).append($editTask_btn,$deleteTask_btn)
     $($checkbox_td).append($checkbox);
     $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td,$operation_td);
-    $('tbody').append($tableRow);
+    $('#todo_tbody').append($tableRow);
     if(editState) {
         $(".operation_td").show();
     }
@@ -294,7 +295,7 @@ function showTask(id){
 
 function deleteTask(id) {
     $.ajax({
-        url:'data_handler_delete.php',
+        url:'data_handlers/data_handler_delete.php',
         data:{
             obj_id: id
         },
@@ -354,8 +355,12 @@ function editTask(id){
             console.log("cannot find task by id");
         }
     }
+    var splitdatetime = task.due_date.split(" ");
+    var date = splitdatetime[0];
+    var time = splitdatetime[1];
     $("#edittaskInput").val(task.task);
-    $("#editdateInput").val(task.due_date);
+    $("#datepickerEdit").val(date);
+    $("#timepickerEdit").val(time);
     $("#editpriorityInput").val(task.priority);
     $("#editdetailsInput").val(task.details);
 }
@@ -371,12 +376,12 @@ function editTask(id){
  */
 function submitChanges(task,i){
     todo_items[index_of_task_to_edit].task = $("#edittaskInput").val();
-    todo_items[index_of_task_to_edit].due_date = $("#editdateInput").val();
+    todo_items[index_of_task_to_edit].due_date = $("#datepickerEdit").val()+" "+ $("#timepickerEdit").val();
     todo_items[index_of_task_to_edit].priority = $("#editpriorityInput").val();
     todo_items[index_of_task_to_edit].details = $("#editdetailsInput").val();
     var task_object = todo_items[index_of_task_to_edit];
     $.ajax({
-        url: 'data_handler_edit.php',
+        url: 'data_handlers/data_handler_edit.php',
         method: "POST",
         cache: false,
         data: {
@@ -408,7 +413,7 @@ var todo_items = {};
 function update_dom_table(){
     console.log('update dom Table pre-ajax');
     $.ajax({ //this page sends data to the login_handler.php page
-        url: "data_handler_receive.php",
+        url: "data_handlers/data_handler_receive.php",
         method: "POST",
         cache: "false",
         data: {},
@@ -425,7 +430,7 @@ function update_dom_table(){
                 console.log("Data in order", todo_items);
                 console.log("todo_items inside of update_dom_table: ", todo_items);
 
-                $('tbody').empty();
+                $('#todo_tbody').empty();
                 for (var j in todo_items) {
                     console.log("in loop", todo_items[j]);
                     create_task_dom(todo_items[j]);
@@ -434,7 +439,7 @@ function update_dom_table(){
             else{
                 console.log("no more data in DB",response);
                 todo_items = {};
-                $('tbody').empty();
+                $('#todo_tbody').empty();
             }
         }
     });
@@ -461,7 +466,7 @@ function complete(id,value) {
     var task_object = todo_items[task];
     //console.log("complete function", todo_items[id])
     $.ajax({
-        url: 'data_handler_complete.php',
+        url: 'data_handlers/data_handler_complete.php',
         method: "POST",
         cache: false,
         data: {
@@ -491,7 +496,7 @@ function add_item_db(task_object){
     console.log('add_item_db pre-ajax');
     console.log("task_object", task_object);
     $.ajax({
-       url: 'data_handler_send.php',
+       url: 'data_handlers/data_handler_send.php',
         method: "POST",
         cache: false,
         data: {
