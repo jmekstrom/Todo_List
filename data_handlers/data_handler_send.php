@@ -16,7 +16,7 @@ if(!empty($_SESSION['user_id'])){
     $priority = $_POST["task_data"]["priority"];
     $task= $_POST["task_data"]["task"];
     $user_id = $_SESSION['user_id'];
-    require('mysql_connect.php');
+    require('../mysql_connect.php');
     $query = "INSERT INTO `tdl_item_list`(`id`, `task`, `details`, `created_datetime`, `user_id`, `complete`, `priority`, `due_date`) VALUES ('$id','$task','$details','$created_datetime','$user_id','$complete','$priority','$due_date')";
     $results = mysqli_query($conn, $query);
     if(mysqli_affected_rows($conn) > 0){

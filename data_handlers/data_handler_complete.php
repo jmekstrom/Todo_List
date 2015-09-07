@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('mysql_connect.php');
+require('../mysql_connect.php');
 $user_id = $_SESSION['user_id'];
 $id = $_POST["task_data"]["id"];
 $complete = $_POST["task_data"]["complete"];

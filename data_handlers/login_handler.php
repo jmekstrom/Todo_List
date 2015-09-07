@@ -2,7 +2,7 @@
 session_start();
 $username = $_POST['username'];
 $password = sha1($_POST['password']);
-require('mysql_connect.php');
+require('../mysql_connect.php');
 $query = "SELECT * FROM tdl_users WHERE username = '$username' AND password = '$password'";
 $results = mysqli_query($conn, $query);
 if(mysqli_num_rows($results) > 0){

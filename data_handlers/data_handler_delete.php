@@ -3,7 +3,7 @@
     session_start();
     $obj_id = $_POST["obj_id"];
 
-    require('mysql_connect.php');
+    require('../mysql_connect.php');
     $query = "DELETE FROM `tdl_item_list` WHERE id='$obj_id'";
     $results = mysqli_query($conn, $query);
     if(mysqli_affected_rows($conn) > 0){
