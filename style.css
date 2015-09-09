@@ -1,0 +1,209 @@
+@font-face {
+    font-family: handdrawn;
+    src: url("fonts/daniel.ttf");
+}
+
+@font-face {
+    font-family: handdrawnbd;
+    src: url("fonts/danielbd.ttf");
+}
+
+.header{
+    background-color: #2A6677;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: white;
+}
+
+.account_summary{
+    padding-top: 15px;
+}
+
+.footer{
+    background-color: #2A6677;
+    height: 100px;
+    font-family: monospace;
+}
+
+.register{
+    width: 50%;
+    min-width: 300px;
+    max-width: 500px;
+    height: 500px;
+    background-color: rgba(200,200,195,0.75);
+    margin: 0 auto;
+    padding: 4%;
+    padding-top: 10px;
+    border-radius: 10px;
+}
+
+.content_container{
+    padding-top: 150px;
+    height: 120%;
+    background-image: url("http://www.remodelista.com/files/styles/733_0s/public/fields/Linen-Reclaimed-oak-floors-remodelista.jpg");
+}
+
+body{
+    font-family: handdrawnbd;
+}
+
+
+.space{
+    margin-top: 10px;
+}
+
+.about{
+    width: 75%;
+    color: black;
+    text-align: center;
+    margin: 0 auto;
+    padding: 50px;
+}
+
+.logged_in{
+    text-align: right;
+    height: 100px;
+}
+
+.logged_in p{
+    margin: 0;
+    padding: 0;
+}
+
+a:link, a:visited{
+    color: #b2fdff
+}
+
+.table{
+    margin: 0 auto;
+    background-color: white;
+    color: #444444;
+    border-radius: 10px;
+    width: 95%;
+}
+
+tr {
+    border-bottom: 2px dashed #eaeaea;
+}
+
+.tableBottom{
+    border: none;
+}
+
+.addBtn{
+    font-size: 30px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 100%;
+    font-style: bold;
+}
+
+.nofocus:focus {
+    outline:none;
+}
+
+.nofocus:active:focus {
+    outline: 0;
+}
+
+.checkbox_th{
+    text-align: center;
+}
+
+tr td:last-child {
+    text-align: center;
+}
+
+.img-circle{
+    height: 50px;
+    width: 50px;
+}
+
+.modal-content{
+    color: #444444;
+    margin-top: 100px;
+
+}
+
+.hour, .minute{
+    font-size: 12px;
+}
+
+.operation_td{
+    position: relative;
+    width: 70px;
+}
+
+.deleteTaskBtn, .editTaskBtn {
+    position: absolute;
+    top: 5px;
+}
+
+.deleteTaskBtn{
+    left: 30px;
+    padding-top: 2px;
+    font-size: 15px;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    border-radius: 100%;
+    font-style: bold;
+}
+
+.editTaskBtn {
+    left: 0;
+    padding-bottom: 2px;
+    font-size: 15px;
+    height: 24px;
+    width: 24px;
+    line-height: 20px;
+    border-radius: 100%;
+    font-style: bold;
+}
+
+
+
+.task_td {
+    -ms-word-break: break-all;
+
+    /* Be VERY careful with this, breaks normal words wh_erever */
+    word-break: break-all;
+
+    /* Non standard for webkit */
+    word-break: break-word;
+
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+.glyphicon:before {
+    visibility: visible;
+    margin: 0 auto;
+}
+
+.glyphicon.glyphicon-unchecked:checked:before {
+    content: "\e067";
+}
+
+input[type=checkbox].glyphicon {
+    visibility: hidden;
+    margin: 0 auto;
+}
+
+.crossout{
+    text-decoration: line-through;
+    color: #ababab;
+}
+
+.editBtn{
+    height: 20px;
+    padding-top: 2px;
+    border-radius: 5px;
+}
+
+.user_info{
+    text-align: right;
+}
+
