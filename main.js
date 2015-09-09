@@ -12,23 +12,23 @@ $(document).ready(function () {
     update_dom_table();
     taskinput = $("#taskInput").val();
     checktaskInput();
-    content_container.on('keyup', '#addModal', function(){
+    content_container.on('keyup', '#addModal', function () {
         taskinput = $("#taskInput").val();
         checktaskInput();
     });
 
-    content_container.on('click', '#loginBtn', function(){
-        login_ajaxCall($('#username').val() ,$('#password').val());
+    content_container.on('click', '#loginBtn', function () {
+        login_ajaxCall($('#username').val(), $('#password').val());
     });
 
     content_container.on('change', '.checkbox', function () {
         var id = $(this).parent().parent().attr("data-index");
         if ($(this).is(':checked')) {
             $(this).parent().parent().siblings().slideToggle();
-            complete(id,1);
+            complete(id, 1);
         }
         else {
-            complete(id,0);
+            complete(id, 0);
         }
     });
 
@@ -133,12 +133,12 @@ function logout_ajaxCall() {
 function addTask() {
     $(".operation_td").hide("slide");
     editState = false;
-    var task     = $("#taskInput").val();
-    var due_date     = $("#datepickerAdd").val()+" "+ $("#timepickerAdd").val();
+    var task = $("#taskInput").val();
+    var due_date = $("#datepickerAdd").val() + " " + $("#timepickerAdd").val();
     console.log(due_date);
     var priority = $("#priorityInput").val();
     var details = $("#detailsInput").val();
-    var created_datetime = Date.now()/1000;
+    var created_datetime = Date.now() / 1000;
     console.log(created_datetime);
     var complete = 0;
     var todo_item = {
@@ -162,14 +162,14 @@ function addTask() {
  */
 
 
-function create_task_dom(todo_item_object){
+function create_task_dom(todo_item_object) {
 
-    if(todo_item_object.complete == 1){
+    if (todo_item_object.complete == 1) {
         var complete = true;
         var crossout = "crossout";
 
     }
-    else{
+    else {
         var complete = false;
         var crossout = "";
     }
@@ -186,7 +186,7 @@ function create_task_dom(todo_item_object){
     }).prop('checked', complete);
 
     var $task_td = $("<td>", {
-        class: "task_td "+crossout,
+        class: "task_td " + crossout,
         onclick: "showTask(" + todo_item_object.id + ")"
     }).text(todo_item_object.task);
     var $date_td = $("<td>", {
@@ -203,8 +203,8 @@ function create_task_dom(todo_item_object){
     var $editTask_btn = $("<button>", {
         type: "button",
         class: "nofocus btn btn-xs btn-warning editTaskBtn",
-        onclick: "editTask("+todo_item_object.id+")"
-    }).append($('<span>',{
+        onclick: "editTask(" + todo_item_object.id + ")"
+    }).append($('<span>', {
         class: 'glyphicon glyphicon-edit'
     }));
     var $deleteTask_btn = $("<button>", {
@@ -212,23 +212,23 @@ function create_task_dom(todo_item_object){
         class: "nofocus btn btn-xs btn-danger deleteTaskBtn",
         onclick: "deleteTask(" + todo_item_object.id + ")"
     }).text('X');
-    if(complete){
+    if (complete) {
         $deleteTask_btn.hide();
         $editTask_btn.hide();
-        $tableRow.css("background-color","lightgrey");
+        $tableRow.css("background-color", "lightgrey");
     }
-    else{
+    else {
         $deleteTask_btn.show();
         $editTask_btn.show();
     }
-    $($operation_td).append($editTask_btn,$deleteTask_btn)
+    $($operation_td).append($editTask_btn, $deleteTask_btn)
     $($checkbox_td).append($checkbox);
-    $($tableRow).append($checkbox_td,$task_td,$date_td,$priority_td,$operation_td);
+    $($tableRow).append($checkbox_td, $task_td, $date_td, $priority_td, $operation_td);
     $('#todo_tbody').append($tableRow);
-    if(editState) {
+    if (editState) {
         $(".operation_td").show();
     }
-    else{
+    else {
         $(".operation_td").hide();
     }
 }
@@ -242,7 +242,7 @@ function create_task_dom(todo_item_object){
  */
 
 
-function addClicked(){
+function addClicked() {
     taskinput = '';
     checktaskInput();
     $('input').val('');
@@ -259,9 +259,9 @@ function addClicked(){
  * @return: activated only if the todoObj is undefined;
  */
 
-function showTask(id){
-    for(var i in todo_items){
-        if(todo_items[i].id == id){
+function showTask(id) {
+    for (var i in todo_items) {
+        if (todo_items[i].id == id) {
             var todoObj = todo_items[i];
         }
     }
@@ -269,10 +269,10 @@ function showTask(id){
         console.log("something is wrong with me...");
         return;
     }
-    if(todoObj.complete == 1){
+    if (todoObj.complete == 1) {
         var status = "Complete";
     }
-    else{
+    else {
         var status = "Incomplete";
     }
     $("#task").html("Task: " + todoObj.task);
@@ -295,18 +295,18 @@ function showTask(id){
 
 function deleteTask(id) {
     $.ajax({
-        url:'data_handlers/data_handler_delete.php',
-        data:{
+        url: 'data_handlers/data_handler_delete.php',
+        data: {
             obj_id: id
         },
         cache: false,
         method: "POST",
         dataType: "json",
         success: function (response) {
-            if(response.success){
+            if (response.success) {
                 update_dom_table();
             }
-            else{
+            else {
                 console.log("nothing in DB to delete")
             }
         }
@@ -327,10 +327,10 @@ function edit() {
     if (!$.isEmptyObject(todo_items)) {
         console.log("edit clicked");
         editState = !editState;
-        if(editState) {
+        if (editState) {
             $(".operation_td").show('slide');
         }
-        else{
+        else {
             $(".operation_td").hide('slide');
         }
     }
@@ -344,14 +344,14 @@ function edit() {
  * @return: N/A;
  */
 
-function editTask(id){
+function editTask(id) {
     $('#editModal').modal('show');
-    for(var i in todo_items){
-        if(todo_items[i].id == id){
+    for (var i in todo_items) {
+        if (todo_items[i].id == id) {
             var task = todo_items[i];
             index_of_task_to_edit = i;
         }
-        else{
+        else {
             console.log("cannot find task by id");
         }
     }
@@ -374,9 +374,9 @@ function editTask(id){
  * @globals: N/A;
  * @return: N/A;
  */
-function submitChanges(task,i){
+function submitChanges(task, i) {
     todo_items[index_of_task_to_edit].task = $("#edittaskInput").val();
-    todo_items[index_of_task_to_edit].due_date = $("#datepickerEdit").val()+" "+ $("#timepickerEdit").val();
+    todo_items[index_of_task_to_edit].due_date = $("#datepickerEdit").val() + " " + $("#timepickerEdit").val();
     todo_items[index_of_task_to_edit].priority = $("#editpriorityInput").val();
     todo_items[index_of_task_to_edit].details = $("#editdetailsInput").val();
     var task_object = todo_items[index_of_task_to_edit];
@@ -390,11 +390,11 @@ function submitChanges(task,i){
         dataType: 'json',
         success: function (response) {
             if (response.success) {
-                console.log("database was edited",response);
+                console.log("database was edited", response);
                 update_dom_table();
             }
             else {
-                console.log("database was not updated",response);
+                console.log("database was not updated", response);
             }
         }
     });
@@ -410,7 +410,7 @@ function submitChanges(task,i){
 
 var todo_items = {};
 
-function update_dom_table(){
+function update_dom_table(username) {
     console.log('update dom Table pre-ajax');
     $.ajax({ //this page sends data to the login_handler.php page
         url: "data_handlers/data_handler_receive.php",
@@ -419,7 +419,7 @@ function update_dom_table(){
         data: {},
         dataType: 'json',
         success: function (response) {
-            if(response.success && !$.isEmptyObject(response.data)) {
+            if (response.success && !$.isEmptyObject(response.data)) {
                 todo_items = {};
                 console.log(response.data);
                 for (var i in response.data) {
@@ -436,8 +436,8 @@ function update_dom_table(){
                     create_task_dom(todo_items[j]);
                 }
             }
-            else{
-                console.log("no more data in DB",response);
+            else {
+                console.log("no more data in DB", response);
                 todo_items = {};
                 $('#todo_tbody').empty();
             }
@@ -455,10 +455,10 @@ function update_dom_table(){
  * @return: N/A;
  */
 
-function complete(id,value) {
-    for(var i in todo_items){
-        console.log(i,todo_items[i]);
-        if(todo_items[i].id == id){
+function complete(id, value) {
+    for (var i in todo_items) {
+        console.log(i, todo_items[i]);
+        if (todo_items[i].id == id) {
             var task = i;
         }
     }
@@ -474,10 +474,10 @@ function complete(id,value) {
         },
         dataType: 'json',
         success: function (response) {
-            if(response.success){
+            if (response.success) {
                 update_dom_table();
             }
-            else{
+            else {
                 console.log("database was not updated");
             }
         }
@@ -492,18 +492,18 @@ function complete(id,value) {
  * @globals: N/A;
  * @return: N/A;
  */
-function add_item_db(task_object){
+function add_item_db(task_object) {
     console.log('add_item_db pre-ajax');
     console.log("task_object", task_object);
     $.ajax({
-       url: 'data_handlers/data_handler_send.php',
+        url: 'data_handlers/data_handler_send.php',
         method: "POST",
         cache: false,
         data: {
-          task_data: task_object
+            task_data: task_object
         },
         dataType: 'json',
-        success: function(response){
+        success: function (response) {
             console.log(response);
             update_dom_table();
         }
@@ -514,9 +514,9 @@ function add_item_db(task_object){
 /*******************
  * Function Name: create_user();
  *
-*/
+ */
 
-function create_user(){
+function create_user() {
     console.log("create user pre-ajax");
     var username = $('#username_create').val();
     var password = $('#password_create').val();
@@ -531,13 +531,14 @@ function create_user(){
             email: email
         },
         dataType: 'json',
-        success: function(response){
+        success: function (response) {
             console.log(response);
-            if(response.success){
+            if (response.success) {
                 login_ajaxCall(username, password);
                 $('#createmodal').modal('hide');
-                $( '.modal-backdrop' ).remove(); //Somewhat hacky but this works for removing that weird modal filter.
+                $('.modal-backdrop').remove(); //Somewhat hacky but this works for removing that weird modal filter.
             }
         }
     })
 }
+

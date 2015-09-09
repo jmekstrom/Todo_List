@@ -1,12 +1,20 @@
 <div class="row header_div">
     <div class='header col-xs-12'>
-        <div class='pull-left col-xs-6'>
+        <div class='col-xs-6'>
             <h1>Todo List</h1>
-        </div> <!--End pull-left col-xs-6-->
-        <div class="col-xs-6 account_summary">
-            <button class='btn btn-default pull-right' id="logoutBtn" onclick="logout_ajaxCall()">Log Out</button>
         </div>
-    </div> <!-- end header col-xs-12-->
+        <!--End pull-left col-xs-6-->
+        <div class="col-xs-6 account_summary">
+            <div class="col-xs-8 user_info">
+                <h4 id="user_display">Hello, <?php session_start();
+                    echo $_SESSION['username']; ?>!</h4>
+            </div>
+            <div class="col-xs-2">
+                <button class='btn btn-default' id="logoutBtn" onclick="logout_ajaxCall()">Log Out</button>
+            </div>
+        </div>
+    </div>
+    <!-- end header col-xs-12-->
 </div> <!--end row header_div-->
 <table class="table table-hover">
     <thead>
@@ -51,7 +59,9 @@
 
                 <div class="input-group form-group date">
                     <input type="text" class="form-control" placeholder="Date" id="datepickerAdd">
-                    <div class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></div>
+
+                    <div class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                    </div>
                     <div class="input-group bootstrap-timepicker pull-right">
                         <input id="timepickerAdd" type="text" class="form-control" placeholder="Time">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
@@ -138,6 +148,7 @@
 
                 <div class="input-group form-group date">
                     <input type="text" class="form-control" placeholder="Date" id="datepickerEdit">
+
                     <div class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                     </div>
                     <div class="input-group bootstrap-timepicker pull-right">

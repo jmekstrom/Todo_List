@@ -10,6 +10,7 @@ if(mysqli_num_rows($results) > 0){
         $user_info = $result;
     }
     $_SESSION["user_id"]= $user_info["id"];
+    $_SESSION["username"] = $user_info["username"];
     $user_info["success"] = true;
     $json_string = json_encode($user_info);
     print($json_string);

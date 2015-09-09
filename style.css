@@ -17,7 +17,7 @@
 }
 
 .account_summary{
-    margin-top: 2%;
+    padding-top: 15px;
 }
 
 .footer{
@@ -202,3 +202,8 @@ input[type=checkbox].glyphicon {
     padding-top: 2px;
     border-radius: 5px;
 }
+
+.user_info{
+    text-align: right;
+}
+
