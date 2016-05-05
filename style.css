@@ -41,7 +41,7 @@
 .content_container{
     padding-top: 150px;
     height: 120%;
-    background-image: url("images/Reclaimed-oak.jpg");
+    background-image: url("../images/Reclaimed-oak.jpg");
 }
 
 body{
